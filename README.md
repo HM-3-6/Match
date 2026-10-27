@@ -119,5 +119,5 @@ cd Match
 ---
 
 <div align="center">
-  <sub>© 2026 Match · 以组件为单位，持续生长</sub>
+  <sub>© 2026 Match</sub>
 </div>
