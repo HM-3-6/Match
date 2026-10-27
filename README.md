@@ -3,7 +3,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="docs/assets/banner-light.svg">
-  <img src="src/static/assets/banner-dark.svg" alt="Match — 组件化前端工程" width="100%">
+  <img src="/src/static/assets/banner-dark.svg" alt="Match — 组件化前端工程" width="100%">
 </picture>
 
 **组件化前端工程 · 文档先行 · 资源归一**
