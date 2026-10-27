@@ -1,0 +1,16 @@
+# 操作系统
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 编辑器 / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 依赖
+node_modules/
+
+# 日志
+*.log
