@@ -1,0 +1,239 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #0a0612;
+    --pink: #ff2d95;
+    --purple: #c026ff;
+    --cyan: #00f0ff;
+    --text: #f5e6ff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+    min-height: 300vh;
+}
+
+/* 背景光晕 */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 20%, rgba(192, 38, 255, 0.18), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(255, 45, 149, 0.12), transparent 50%),
+        radial-gradient(ellipse 50% 30% at 50% 90%, rgba(0, 240, 255, 0.08), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ========== Hero 区域 ========== */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(4rem, 15vw, 10rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    background: linear-gradient(135deg, #fff 0%, var(--pink) 40%, var(--purple) 70%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 40px rgba(255, 45, 149, 0.3);
+    opacity: 0;
+    transform: scale(0.6) rotate(-8deg);
+    animation: logoIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+@keyframes logoIn {
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.subtitle {
+    margin-top: 1.5rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(245, 230, 255, 0.7);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.2s forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245, 230, 255, 0.45);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.8s forwards, bounce 2s ease 2.5s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(8px);
+    }
+}
+
+/* ========== 滚动文字揭示区域 ========== */
+.reveal-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 8vw;
+    position: relative;
+    z-index: 1;
+}
+
+.reveal-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.2rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+    max-width: 14ch;
+    /* 核心：用渐变作为文字颜色，通过 background-position 实现滚动揭示 */
+    background: linear-gradient(180deg,
+            rgba(245, 230, 255, 0.15) 0%,
+            rgba(245, 230, 255, 0.15) 40%,
+            #fff 50%,
+            var(--pink) 60%,
+            var(--purple) 80%,
+            var(--cyan) 100%);
+    background-size: 100% 250%;
+    background-position: 0 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: background-position 0.1s linear;
+    will-change: background-position;
+}
+
+/* ========== 字母拆分动画区域 ========== */
+.split-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.split-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.08em;
+    margin-bottom: 2rem;
+}
+
+.split-title .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(60%) rotateX(40deg) scale(0.8);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.split-title.in-view .char {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+}
+
+.split-title .char:nth-child(odd) {
+    color: var(--pink);
+}
+
+.split-title .char:nth-child(even) {
+    color: var(--cyan);
+}
+
+.desc {
+    max-width: 520px;
+    text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(245, 230, 255, 0.65);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease 0.4s;
+}
+
+.split-section.in-view .desc {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========== 底部小提示 ========== */
+.footer-note {
+    text-align: center;
+    padding: 60px 20px 100px;
+    font-size: 0.85rem;
+    color: rgba(245, 230, 255, 0.35);
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+}
+
+/* 装饰线 */
+.deco-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--pink), var(--purple));
+    margin: 0 auto 2rem;
+    border-radius: 2px;
+    opacity: 0.7;
+}
