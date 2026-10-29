@@ -1,0 +1,773 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 布局 */
+
+.wrap {
+    width: 80%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.top {
+    width: 100%;
+    height: 252px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.bottomBox {
+    display: flex;
+    gap: 10px;
+}
+
+.leftBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.leftItem {
+    height: auto;
+    min-height: 180px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rightBox {
+    flex: 2;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 布局 */
+
+/* 头 */
+
+.hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    border-bottom: 2px solid #ca8a5c;
+    display: inline-block;
+    width: 100%;
+    margin: 50px 0 20px 0;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    letter-spacing: 2px;
+    color: #b35927;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.hero .sub {
+    font-size: 1rem;
+    color: #b17947;
+    margin-bottom: 0.8rem;
+    font-style: italic;
+}
+
+.divider {
+    width: 80px;
+    height: 3px;
+    background: #dd9f6e;
+    margin: 0.6rem auto 1rem;
+    border-radius: 2px;
+}
+
+/* 头 */
+
+/* 搜索栏 */
+
+.labelCard {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin: 35px auto;
+    max-width: 1400px;
+    height: 180px;
+    overflow: hidden;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+.tab-nav {
+    display: flex;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-item {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tab-item:hover {
+    color: #ff6b00;
+    background-color: rgba(255, 107, 0, 0.05);
+}
+
+.tab-item.active {
+    /* 激活状态 */
+    color: #ff6b00;
+    font-weight: bold;
+    background-color: #fff;
+}
+
+.tab-item.active::after {
+    /* 激活状态下方的指示条 */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background-color: #ff6b00;
+    border-radius: 2px 2px 0 0;
+}
+
+.tab-content {
+    padding: 35px;
+    min-height: 120px;
+}
+
+.tab-content>div {
+    /* 隐藏非激活的 tab 内容 */
+    display: none;
+}
+
+.tab-content>div.show {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.searchPanel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.searchPanel input[type="text"] {
+    height: 55px;
+    padding: 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-size: 14px;
+    color: #333;
+}
+
+.searchPanel input[type="text"]:focus {
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.1);
+}
+
+.searchPanel[data-type="all"] input[type="text"] {
+    /* 针对不同面板的输入框宽度调整 */
+    width: 550px;
+}
+
+.searchPanel[data-type="hotel"] input[type="text"] {
+    width: 200px;
+}
+
+
+.date-input {
+    /* 酒店日期选择区域 */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date-input input[type="text"] {
+    width: 180px !important;
+    /* 强制覆盖上面的宽度 */
+}
+
+.date-input input[type="date"] {
+    height: 40px;
+    padding: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    color: #666;
+    cursor: pointer;
+}
+
+.date-input input[type="date"]:focus {
+    border-color: #ff6b00;
+}
+
+.searchBtn {
+    height: 53px;
+    padding: 0 30px;
+    background-color: #ff6b00;
+    /* 主题色 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    letter-spacing: 2px;
+}
+
+.searchBtn:hover {
+    background-color: #e55a00;
+    /* 深一点的橙色 */
+}
+
+
+@media (max-width: 768px) {
+
+    /* 响应式适配 */
+    .searchPanel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .searchPanel input[type="text"],
+    .date-input,
+    .date-input input[type="text"],
+    .date-input input[type="date"] {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .date-input {
+        flex-direction: column;
+    }
+
+    .searchBtn {
+        width: 100%;
+    }
+}
+
+/* 搜索栏 */
+
+/* 精选目的地区 */
+
+.topContent {
+    width: 100%;
+    height: 210px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.top h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.topImg {
+    flex: 1;
+    overflow: hidden;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.topImg:hover {
+    transform: translateY(-5px);
+}
+
+.topImg a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.topImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 精选目的地区 */
+
+/* 天气预报 */
+
+.leftItem h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.moreWeatherLink {
+    font-size: 12px;
+    color: #039BE5;
+    text-decoration: none;
+    background: #e1f5fe;
+    padding: 4px 10px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.moreWeatherLink:hover {
+    background: #039BE5;
+    color: #fff;
+    transform: translateX(2px);
+}
+
+.leftItemContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.weatherList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.weatherItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    border-bottom: 1px dashed #f0f0f0;
+    font-size: 14px;
+    color: #666;
+    transition: background-color 0.2s;
+}
+
+.weatherItem:last-child {
+    border-bottom: none;
+}
+
+.weatherItem:hover {
+    background-color: #f9fbfd;
+    border-radius: 4px;
+}
+
+
+.weatherItem .city {
+    font-weight: bold;
+    color: #2c3e50;
+    width: 50px;
+}
+
+.weatherItem .icon {
+    font-size: 16px;
+    width: 30px;
+    text-align: center;
+}
+
+.weatherItem .condition {
+    width: 50px;
+    color: #555;
+}
+
+.weatherItem .quality {
+    font-size: 12px;
+    color: #888;
+    background: #e8f5e9;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+.weatherItem .temp {
+    font-weight: bold;
+    color: #ff9800;
+    width: 80px;
+    text-align: right;
+}
+
+/* 天气预报 */
+
+/* 地方美食 (复用天气预报) */
+
+.sectionHeader.simple {
+    border-bottom: none;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.foodList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.foodItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #f0f0f0;
+    transition: background-color 0.2s;
+}
+
+.foodItem:last-child {
+    border-bottom: none;
+}
+
+.foodItem:hover {
+    background-color: #fafafa;
+    border-radius: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.foodImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.foodImg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.foodInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.foodInfo h4 {
+    font-size: 15px;
+    color: #333;
+    margin: 0 0 4px 0;
+    font-weight: 600;
+}
+
+.foodInfo .desc {
+    font-size: 12px;
+    color: #888;
+    margin: 0 0 4px 0;
+}
+
+.foodInfo .rating {
+    font-size: 12px;
+    color: #ff9800;
+    font-weight: bold;
+}
+
+/* 地方美食 (复用天气预报) */
+
+/* 旅行攻略/故事区 */
+
+.rightBoxHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.rightBoxHeader h2 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+
+
+.rightBoxHeader .eng {
+    color: #999;
+    font-size: 14px;
+    font-weight: normal;
+    padding-left: 10px;
+}
+
+.more-guides-link {
+    font-size: 13px;
+    color: #039BE5;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.more-guides-link:hover {
+    color: #0277bd;
+    text-decoration: underline;
+}
+
+.guide-card {
+    /* 攻略卡片主体 */
+    display: flex;
+    gap: 15px;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f5f5f5;
+    transition: transform 0.2s ease;
+}
+
+.guide-card:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.guide-card:hover {
+    transform: translateX(5px);
+
+}
+
+
+.guide-img {
+    /* 图片区域 */
+    width: 160px;
+    height: 110px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.guide-img a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.guide-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.guide-card:hover .guide-img img {
+    transform: scale(1.1);
+}
+
+
+.guide-content {
+    /* 内容区域 */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.guide-content h3 {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+}
+
+.guide-content h3 a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.guide-content h3 a:hover {
+    color: #039BE5;
+}
+
+.excerpt {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+    display: -webkit-box;
+    /* 限制行数 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.guide-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #999;
+}
+
+.tag {
+    background: #f0f9ff;
+    color: #039BE5;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* 旅行攻略/故事区 */
+
+/* 图文 */
+
+.top h2 .eng,
+.leftItem h2 .eng,
+.rightBox h2 .eng {
+    color: rgb(60, 60, 60);
+    font-size: 16px;
+    padding-left: 50px;
+    font-weight: normal;
+    width: 100%;
+}
+
+.imgText {
+    width: 750px;
+    height: 150px;
+    margin: 25px auto;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+}
+
+.img-left {
+    width: 40%;
+    height: 100%;
+}
+
+.img-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-right {
+    width: 60%;
+    padding: 0 20px;
+}
+
+.text-right p {
+    line-height: 1.6;
+}
+
+/* 图文 */
+
+/* 游记分享样式开始 */
+.Notepad {
+    width: 1000px;
+    margin: 30px auto auto auto;
+}
+
+.top-title {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.top-title h1 {
+    color: #ff5900;
+    font-size: 32px;
+}
+
+.msg-box {
+    background: #f9f9f9;
+    padding: 30px;
+    margin: 20px 0;
+    border-radius: 8px;
+    border-top: 4px solid #ff6600;
+}
+
+textarea {
+    height: 200px;
+    width: 940px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.msg-box button {
+    padding: 8px 20px;
+    background: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+.msg-box button:hover {
+    background: #ff3300;
+}
+
+.msg-list {
+    margin-top: 20px;
+}
+
+.msg-item {
+    background: #fff;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border-left: 4px solid #ff6600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.msg-text {
+    line-height: 1.6;
+}
+
+.del-btn {
+    background: #ff3300;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+/* 游记分享结束 */
+
+/* 尾部 */
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    color: #b98454;
+    font-size: 0.85rem;
+    border-top: 3px solid #f0dfce;
+    margin: 0 0 35px 0;
+}
+
+/* 尾部 */
