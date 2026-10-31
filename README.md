@@ -50,8 +50,8 @@ Match
 ├── docs/                 # 需求文档、设计说明与文档资源
 │   └── assets/           # README 横幅等文档图像
 ├── src/
-│   ├── components/       # 组件 / 可复用组件
-│   └── static/           # 图片、字体、图标等静态资源
+│   ├── components/       # 组件 / 可复用组件（JS放这里）
+│   └── static/           # 图片、字体、图标等静态资源（CSS放这里）
 ├── .gitignore
 └── README.md
 ```
