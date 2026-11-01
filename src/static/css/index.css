@@ -638,47 +638,134 @@
     font-weight: 500;
 }
 
-/* 旅行攻略/故事区 */
+/* 红色故事区 */
 
-/* 图文 */
 
-.top h2 .eng,
-.leftItem h2 .eng,
-.rightBox h2 .eng {
-    color: rgb(60, 60, 60);
-    font-size: 16px;
-    padding-left: 50px;
-    font-weight: normal;
+
+/* 容器样式 */
+.slider-box {
+    position: relative;
     width: 100%;
-}
-
-.imgText {
-    width: 750px;
-    height: 150px;
-    margin: 25px auto;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 8px;
     display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
+    flex-direction: column;
 }
 
-.img-left {
-    width: 40%;
-    height: 100%;
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    align-items: stretch;
+    /* 默认值，确保每项等高 */
 }
 
-.img-left img {
+/* 图片区 */
+.img-wrap {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    /* 固定高度，根据需要调整 */
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+/* 图片的样式 */
+.slider-box img {
     width: 100%;
     height: 100%;
+    /* 关键：填满固定高度 */
     object-fit: cover;
+    /* 关键：裁剪填充，保持比例不拉伸 */
+    display: block;
 }
 
-.text-right {
-    width: 60%;
-    padding: 0 20px;
+/* 右边的图片（现在的实景图）绝对定位盖在上面 */
+.img-now {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* 使用 clip-path 进行裁剪，只显示右边一半 */
+    clip-path: polygon(var(--percent, 50%) 0, 100% 0, 100% 100%, var(--percent, 50%) 100%);
 }
 
-.text-right p {
-    line-height: 1.6;
+/* 拖动条样式 */
+.slider-input {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    -webkit-appearance: none;
+    background: transparent;
+    cursor: ew-resize;
+    z-index: 10;
+}
+
+/* 滑块中间的红色圆钮 */
+.slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    background-color: #c0392b;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 中间的分割线 */
+.line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--percent, 50%);
+    width: 2px;
+    background: #fff;
+    z-index: 5;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+/* 信息区 */
+.info-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 10px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    text-align: center;
+    gap: 6px;
+    flex: 1;
+    min-height: 70px;
+    box-sizing: border-box;
+}
+
+
+.info-bar .time {
+    font-size: 14px;
+    color: #c0392b;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.info-bar .event {
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.info-bar .time:hover,
+.info-bar .event:hover {
+    color: #e74c3c;
+    text-decoration: underline;
 }
 
 /* 图文 */

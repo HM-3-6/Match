@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>。
+    <link rel="stylesheet" href="../src/static/css/index.css">
+</head>
+
+<body>
+    <div class="hero">
+        <h1>行·</h1>
+        <div class="divider"></div>
+        <div class="sub">一站式文化旅游资讯平台</div>
+    </div>
+    <div class="labelCard">
+        <div class="tab-nav">
+            <div class="tab-item active" data-index="0">全部</div>
+            <div class="tab-item" data-index="1">酒店</div>
+            <div class="tab-item" data-index="2">目的地</div>
+            <div class="tab-item" data-index="3">去旅行</div>
+        </div>
+        <div class="tab-content">
+            <div class="show">
+                <div class="searchPanel" data-type="all">
+                    <input type="text" placeholder="&nbsp;&nbsp;&nbsp;搜目的地/攻略/酒店/旅行特价">
+                    <button class="searchBtn"><a style="text-decoration: none; color: #fff;" href="./hotel.html"
+                            target="_blank">搜&nbsp;&nbsp;&nbsp;一&nbsp;&nbsp;&nbsp;下</a></button>
+                </div>
+            </div>
+            <div>
+                <div class="searchPanel" data-type="hotel">
+                    <input type="text" placeholder="&nbsp;&nbsp;&nbsp;请输入国家、地区、城市名称">
+                    <div class="date-input">
+                        <input style="width: auto;" type="text" placeholder="&nbsp;&nbsp;&nbsp;请输入/选择到/离日期" readonly>
+                        <input type="date" id="statr" title="选择到店日期">
+                        <input type="date" id="end" title="选择离店日期">
+                    </div>
+                    <button class="searchBtn"><a style="text-decoration: none; color: #fff;" href="./hotel.html"
+                            target="_blank">搜&nbsp;&nbsp;&nbsp;一&nbsp;&nbsp;&nbsp;下</a></button>
+                </div>
+            </div>
+            <div>
+                <div class="searchPanel" data-type="all">
+                    <input type="text" placeholder="&nbsp;&nbsp;&nbsp;搜目的地">
+                    <button class="searchBtn">搜&nbsp;&nbsp;&nbsp;一&nbsp;&nbsp;&nbsp;下</button>
+                </div>
+            </div>
+            <div>
+                <div class="searchPanel" data-type="all">
+                    <input type="text" placeholder="&nbsp;&nbsp;&nbsp;搜攻略/旅行特价">
+                    <button class="searchBtn">搜&nbsp;&nbsp;&nbsp;一&nbsp;&nbsp;&nbsp;下</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="top">
+            <h2>&nbsp;&nbsp;精选旅游路线<span class="eng"> &nbsp;</span></h2>
+            <div class="topContent">
+                <!--两条路线推荐-->
+                <!--嵌入地图-->
+
+            </div>
+        </div>
+        <div class="bottomBox">
+            <div class="leftBox">
+                <div class="leftItem">
+                    <!--云打卡+数字勋章-->
+                    <h2>&nbsp;&nbsp;云打卡<span class="eng">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h2>
+
+                    </a>
+                    <div class="leftItemContent">
+
+                    </div>
+                </div>
+                <div class="leftItem">
+                    <div class="leftItem foodListContainer">
+                        <div class="sectionHeader simple">
+                            <h2>红色景点推荐</h2>
+                            <a href="" target="_blank" class="more-guides-link">
+                                攻略查看 &rarr;</a>
+
+                        </div>
+
+                        <ul class="foodList">
+                            <!-- 景点1 -->
+
+                            <!-- 景点2 -->
+
+                            <!-- 景点3 -->
+
+                            <!-- 景点4 -->
+
+                            <!-- 景点5 -->
+
+                            <!-- 景点6 -->
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="rightBox">
+                <div class="rightBoxHeader">
+                    <h2>&nbsp;&nbsp;红色故事区<span class="eng">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h2>
+                    <!--插入图片和文字，图片可展示从前和曾经--><!--三个横向排布，分为两行-->
+                </div>
+                <div class="grid-container">
+                    <!-- 红色故事 1:南昌起义 -->
+
+                    <div class="slider-box">
+                        <!--图片区-->
+                        <div class="img-wrap">
+                            <!-- 左边：历史老照片 (底层) -->
+                            <img src="./static/image/南昌起义旧.jpg" alt="历史老照片">
+
+                            <!-- 右边：现在的实景图 (顶层) -->
+                            <img src="./static/image/南昌起义新.jpg" alt="今日实景" class="img-now">
+
+                            <!-- 分割线 -->
+                            <div class="line"></div>
+
+                            <!-- 隐藏的滑动条 -->
+                            <input type="range" min="0" max="100" value="50" class="slider-input">
+                        </div>
+                        <!--图片下方信息区-->
+                        <div class="info-bar">
+                            <!--时间-->
+                            <a class="time" href="https://baike.baidu.com/item/南昌起义" target="_blank"
+                                rel="noopener">1927年8月1日</a>
+                            <!--事件-->
+                            <a class="event" href="https://baike.baidu.com/item/南昌起义" target="_blank"
+                                rel="noopener">南昌起义</a>
+                        </div>
+                    </div>
+
+                    <!-- 红色故事 2 井冈山革命根据地 -->
+                    <div class="slider-box">
+                        <!--图片区-->
+                        <div class="img-wrap">
+                            <!-- 左边：历史老照片 (底层) -->
+                            <img src="./static/image/井冈山茨坪旧.jpg" alt="历史老照片">
+
+                            <!-- 右边：现在的实景图 (顶层) -->
+                            <img src="./static/image/井冈山茨坪新.jpg" alt="今日实景" class="img-now">
+
+                            <!-- 分割线 -->
+                            <div class="line"></div>
+
+                            <!-- 隐藏的滑动条 -->
+                            <input type="range" min="0" max="100" value="50" class="slider-input">
+                        </div>
+                        <!--图片下方信息区-->
+                        <div class="info-bar">
+                            <!--时间-->
+                            <a class="time" href="https://baike.baidu.com/item/井冈山革命根据地" target="_blank"
+                                rel="noopener">1927年10月—1929年</a>
+                            <!--事件-->
+                            <a class="event" href="https://baike.baidu.com/item/井冈山革命根据地" target="_blank"
+                                rel="noopener">井冈山革命根据地</a>
+                        </div>
+                    </div>
+                    <!-- 红色故事 3 红军长征出发地-->
+                    <div class="slider-box">
+                        <!--图片区-->
+                        <div class="img-wrap">
+                            <!-- 左边：历史老照片 (底层) -->
+                            <img src="./static/image/于都浮桥旧.jpeg" alt="历史老照片">
+
+                            <!-- 右边：现在的实景图 (顶层) -->
+                            <img src="./static/image/于都新.jpg" alt="今日实景" class="img-now">
+
+                            <!-- 分割线 -->
+                            <div class="line"></div>
+
+                            <!-- 隐藏的滑动条 -->
+                            <input type="range" min="0" max="100" value="50" class="slider-input">
+                        </div>
+                        <!--图片下方信息区-->
+                        <div class="info-bar">
+                            <!--时间-->
+                            <a class="time" href="https://baike.baidu.com/item/于都" target="_blank"
+                                rel="noopener">1934年10月</a>
+                            <!--事件-->
+                            <a class="event" href="https://baike.baidu.com/item/于都" target="_blank"
+                                rel="noopener">红军长征出发地</a>
+                        </div>
+
+                    </div>
+
+                    <!-- 红色故事 4 飞夺泸定桥-->
+                    <div class="slider-box">
+                        <!--图片区-->
+                        <div class="img-wrap">
+                            <!-- 左边：历史老照片 (底层) -->
+                            <img src="./static/image/泸定桥旧.jpg" alt="历史老照片">
+
+                            <!-- 右边：现在的实景图 (顶层) -->
+                            <img src="./static/image/泸定桥新.jpg" alt="今日实景" class="img-now">
+
+                            <!-- 分割线 -->
+                            <div class="line"></div>
+
+                            <!-- 隐藏的滑动条 -->
+                            <input type="range" min="0" max="100" value="50" class="slider-input">
+                        </div>
+                        <!--图片下方信息区-->
+                        <div class="info-bar">
+                            <!--时间-->
+                            <a class="time" href="https://baike.baidu.com/item/飞夺泸定桥" target="_blank"
+                                rel="noopener">1935年5月29日</a>
+                            <!--事件-->
+                            <a class="event" href="https://baike.baidu.com/item/飞夺泸定桥" target="_blank"
+                                rel="noopener">飞夺泸定桥</a>
+                        </div>
+                    </div>
+                    <!-- 红色故事 5 遵义会议-->
+                    <div class="slider-box">
+                        <!--图片区-->
+                        <div class="img-wrap">
+                            <!-- 左边：历史老照片 (底层) -->
+                            <img src="./static/image/遵义会议旧.jpg" alt="历史老照片">
+
+                            <!-- 右边：现在的实景图 (顶层) -->
+                            <img src="./static/image/遵义会议新.jpg" alt="今日实景" class="img-now">
+
+                            <!-- 分割线 -->
+                            <div class="line"></div>
+
+                            <!-- 隐藏的滑动条 -->
+                            <input type="range" min="0" max="100" value="50" class="slider-input">
+                        </div>
+                        <!--图片下方信息区-->
+                        <div class="info-bar">
+                            <!--时间-->
+                            <a class="time" href="https://baike.baidu.com/item/遵义会议" target="_blank"
+                                rel="noopener">1935年1月</a>
+                            <!--事件-->
+                            <a class="event" href="https://baike.baidu.com/item/遵义会议" target="_blank"
+                                rel="noopener">遵义会议</a>
+                        </div>
+                    </div>
+                    <!-- 红色故事 6 延安-->
+                    <div class="slider-box">
+                        <!--图片区-->
+                        <div class="img-wrap">
+                            <!-- 左边：历史老照片 (底层) -->
+                            <img src="./static/image/延安旧.webp" alt="历史老照片">
+
+                            <!-- 右边：现在的实景图 (顶层) -->
+                            <img src="./static/image/延安新.png" alt="今日实景" class="img-now">
+
+                            <!-- 分割线 -->
+                            <div class="line"></div>
+
+                            <!-- 隐藏的滑动条 -->
+                            <input type="range" min="0" max="100" value="50" class="slider-input">
+                        </div>
+                        <!--图片下方信息区-->
+                        <div class="info-bar">
+                            <!--时间-->
+                            <a class="time" href="https://baike.baidu.com/item/延安" target="_blank"
+                                rel="noopener">1935年10月—1948年3月</a>
+                            <!--事件-->
+                            <a class="event" href="https://baike.baidu.com/item/延安" target="_blank"
+                                rel="noopener">延安</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <p>&copy;&nbsp;&nbsp;行·迹 一站式文化旅游资讯平台</p>
+    </footer>
+
+
+
+    <!-- 搜索栏 -->
+    <script src="../javascript/tabNav.js"></script>
+    <script src="../javascript/search.js"></script>
+    <script src="../javascript/message.js"></script>
+    <script>
+        const boxes = document.querySelectorAll('.slider-box');
+
+        boxes.forEach((box) => {
+            const slider = box.querySelector('.slider-input');
+
+            // 初始化一次，保证初始分割位置正确
+            box.style.setProperty('--percent', slider.value + '%');
+
+            // 监听拖动
+            slider.addEventListener('input', (e) => {
+                box.style.setProperty('--percent', e.target.value + '%');
+            });
+        });
+    </script>
+</body>
+
+</html>
