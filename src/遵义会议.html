@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遵义会议 · 红色故事</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif; background-color: #f5efe9; color: #2c2c2c; line-height: 1.7; padding: 2rem 1rem; }
+        .container { max-width: 1000px; margin: 0 auto; background: #fffcf8; border: 2px solid #b13e3e; border-radius: 18px; box-shadow: 0 12px 28px rgba(150, 0, 0, 0.15); padding: 2.5rem 2rem; position: relative; overflow: hidden; }
+        .container::before { content: "📜"; position: absolute; top: 15px; left: 22px; font-size: 2rem; opacity: 0.25; }
+        .container::after { content: ""; position: absolute; bottom: 0; right: 0; width: 150px; height: 150px; background: radial-gradient(circle, rgba(200, 60, 60, 0.05) 0%, transparent 70%); pointer-events: none; }
+        .header { text-align: center; margin-bottom: 2.5rem; border-bottom: 3px solid #b13e3e; padding-bottom: 1.5rem; position: relative; }
+        .header h1 { font-size: 2.8rem; color: #8b1e1e; letter-spacing: 3px; font-weight: 700; text-shadow: 1px 1px 0 #e0c9b0; margin-bottom: 0.5rem; }
+        .header .subhead { font-size: 1.2rem; color: #5e3a3a; font-style: italic; letter-spacing: 1px; }
+        .ribbon { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+        .ribbon span { display: inline-block; width: 40px; height: 6px; background: #b13e3e; border-radius: 3px; }
+        .ribbon span:nth-child(2) { width: 60px; background: #c93a3a; }
+        .ribbon span:nth-child(3) { width: 30px; background: #a52a2a; }
+        .intro-card { background: #fef4e9; border-left: 10px solid #b13e3e; padding: 1.8rem 2rem; border-radius: 0 30px 30px 0; margin-bottom: 2.5rem; box-shadow: 0 6px 14px rgba(0,0,0,0.03); }
+        .intro-card p { font-size: 1.2rem; font-weight: 500; color: #2e1e1e; margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 10px; }
+        .intro-card p:last-child { margin-bottom: 0; font-weight: 400; font-size: 1.08rem; color: #3f2c2c; display: block; }
+        .css-star { color: #b13e3e; font-size: 1.2rem; flex-shrink: 0; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin: 2.5rem 0; }
+        .info-box { background: #ffffff; border-radius: 24px; padding: 1.6rem 1.8rem; box-shadow: 0 6px 18px rgba(170, 70, 70, 0.08); border: 1px solid #f0dbd0; transition: transform 0.2s ease; }
+        .info-box:hover { transform: translateY(-3px); }
+        .info-box h3 { font-size: 1.5rem; color: #8b1e1e; border-left: 6px solid #b13e3e; padding-left: 14px; margin-bottom: 1.2rem; font-weight: 600; }
+        .info-box ul { list-style: none; }
+        .info-box li { margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 10px; font-size: 1.05rem; }
+        .info-box li strong { min-width: 90px; color: #7a2e2e; font-weight: 600; }
+        .person-tags { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+        .person-tag { background: #f0e2d6; color: #7a2e2e; padding: 6px 18px; border-radius: 40px; font-weight: 500; font-size: 0.98rem; border: 1px solid #dbb5a5; }
+        .story-section h2 { font-size: 2rem; color: #8b1e1e; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+        .story-section h2::before { content: "⚡"; color: #b13e3e; font-size: 2.2rem; }
+        .story-block { background: #fffaf5; border-radius: 24px; padding: 1.8rem 2rem; margin-bottom: 1.8rem; border: 1px solid #ebd9ce; }
+        .story-block p { margin-bottom: 1rem; font-size: 1.08rem; text-align: justify; }
+        .story-block strong { color: #9e2b2b; }
+        .slogan { background: #b13e3e; color: #fff5e6; font-size: 1.6rem; font-weight: 700; text-align: center; padding: 1.4rem 1.8rem; border-radius: 60px; margin: 2.5rem 0 1.8rem; letter-spacing: 2px; box-shadow: 0 8px 16px rgba(170, 40, 40, 0.3); font-style: italic; }
+        .timeline { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 2.5rem; gap: 12px; }
+        .timeline-item { flex: 1 1 180px; background: #f9ede4; padding: 1.2rem 1rem; border-radius: 30px; text-align: center; border-bottom: 5px solid #b13e3e; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        .timeline-item .date { font-weight: 800; font-size: 1.3rem; color: #8b1e1e; display: block; margin-bottom: 6px; }
+        .timeline-item .desc { font-size: 0.98rem; color: #3d2b2b; }
+        .footer { margin-top: 2.8rem; padding-top: 1.5rem; text-align: center; border-top: 2px dashed #d4b9aa; font-size: 0.95rem; color: #7a5a4a; font-style: italic; }
+        @media (max-width: 700px) { .container { padding: 1.8rem 1.2rem; } .header h1 { font-size: 2rem; } .info-grid { grid-template-columns: 1fr; } .slogan { font-size: 1.3rem; } .timeline-item { flex: 1 1 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>遵义会议</h1>
+            <div class="subhead">1935.1 · 生死攸关的转折点</div>
+            <div class="ribbon"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="intro-card">
+            <p><span class="css-star">★</span> 遵义会议是中国共产党历史上一个生死攸关的转折点，标志着党在政治上开始走向成熟。</p>
+            <p>1935年1月，在红军长征途中，中共中央政治局在贵州遵义召开扩大会议。会议纠正了博古、李德等人在军事上和组织上的“左”倾错误，确立了毛泽东在党和红军中的领导地位，挽救了党、挽救了红军、挽救了中国革命。</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>⏳ 历史坐标</h3>
+                <ul>
+                    <li><strong>时间</strong><span>1935年1月15日 - 17日</span></li>
+                    <li><strong>地点</strong><span>贵州遵义老城琵琶桥（柏辉章公馆）</span></li>
+                    <li><strong>背景</strong><span>第五次反“围剿”失败，长征初期遭受重创</span></li>
+                    <li><strong>核心决议</strong><span>改选中央领导机构，确立毛泽东的领导地位</span></li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>👥 关键人物</h3>
+                <div class="person-tags">
+                    <span class="person-tag">毛泽东</span>
+                    <span class="person-tag">周恩来</span>
+                    <span class="person-tag">张闻天</span>
+                    <span class="person-tag">朱德</span>
+                    <span class="person-tag">王稼祥</span>
+                    <span class="person-tag">陈云</span>
+                    <span class="person-tag">刘少奇</span>
+                </div>
+                <p style="margin-top: 1.2rem; font-size: 0.98rem; color: #5a3e3e;">会议增选毛泽东为政治局常委，取消“三人团”的最高军事指挥权。</p>
+            </div>
+        </div>
+
+        <div class="story-section">
+            <h2>红色故事 · 历史在这里转折</h2>
+            <div class="story-block">
+                <p><strong>1935年1月，红军攻占遵义。</strong> 此时，中央红军经过湘江战役的惨烈损失，人数由出发时的8.6万人锐减至3万余人，士气低落，前路迷茫。党内对“左”倾教条主义军事指挥的质疑日益强烈。</p>
+                <p>1月15日至17日，中共中央政治局在遵义老城的一栋两层小楼里召开扩大会议。会议室里，炭火盆烧得正旺。博古首先作了关于第五次反“围剿”的总结报告，将失败归咎于客观原因。随后，周恩来、张闻天、毛泽东等先后发言，严厉批评了博古、李德在军事指挥上的严重错误。</p>
+            </div>
+            <div class="story-block">
+                <p><strong>毛泽东的发言切中要害。</strong> 他用前几次反“围剿”胜利和这次失败的事实作对比，深刻剖析了“左”倾冒险主义在军事上的表现。王稼祥、朱德、刘少奇等纷纷发言支持毛泽东的正确主张。会议经过激烈讨论，最终做出了改选中央领导机构的决定。</p>
+                <p>遵义会议结束了“左”倾教条主义在党中央的统治，实际上确立了毛泽东在党中央和红军的领导地位。从此，红军在毛泽东的指挥下，四渡赤水、巧渡金沙江，摆脱了几十万敌军的围追堵截，从胜利走向胜利。</p>
+            </div>
+        </div>
+
+        <div class="slogan">“ 雄关漫道真如铁，而今迈步从头越！ ”</div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="date">1935.1.7</span>
+                <span class="desc">红军智取遵义城</span>
+            </div>
+            <div class="timeline-item">
+                <span class="date">1935.1.15</span>
+                <span class="desc">遵义会议召开</span>
+            </div>
+            <div class="timeline-item">
+                <span class="date">1935.1.17</span>
+                <span class="desc">会议闭幕，确立毛泽东领导地位</span>
+            </div>
+            <div class="timeline-item">
+                <span class="date">1935.1-3</span>
+                <span class="desc">四渡赤水，跳出敌军包围圈</span>
+            </div>
+            <div class="timeline-item">
+                <span class="date">1935.5</span>
+                <span class="desc">巧渡金沙江，彻底摆脱追兵</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>⭐ 生死攸关转折点 · 伟大转折开新篇 ⭐</p>
+        </div>
+    </div>
+</body>
+</html>

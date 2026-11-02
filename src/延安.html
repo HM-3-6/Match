@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>延安 · 红色故事</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif; background-color: #f5efe9; color: #2c2c2c; line-height: 1.7; padding: 2rem 1rem; }
+        .container { max-width: 1000px; margin: 0 auto; background: #fffcf8; border: 2px solid #b13e3e; border-radius: 18px; box-shadow: 0 12px 28px rgba(150, 0, 0, 0.15); padding: 2.5rem 2rem; position: relative; overflow: hidden; }
+        .container::before { content: "🗼"; position: absolute; top: 15px; left: 22px; font-size: 2rem; opacity: 0.25; transform: rotate(-5deg); }
+        .container::after { content: ""; position: absolute; bottom: 0; right: 0; width: 150px; height: 150px; background: radial-gradient(circle, rgba(200, 60, 60, 0.05) 0%, transparent 70%); pointer-events: none; }
+        .header { text-align: center; margin-bottom: 2.5rem; border-bottom: 3px solid #b13e3e; padding-bottom: 1.5rem; position: relative; }
+        .header h1 { font-size: 2.8rem; color: #8b1e1e; letter-spacing: 3px; font-weight: 700; text-shadow: 1px 1px 0 #e0c9b0; margin-bottom: 0.5rem; }
+        .header .subhead { font-size: 1.2rem; color: #5e3a3a; font-style: italic; letter-spacing: 1px; }
+        .ribbon { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+        .ribbon span { display: inline-block; width: 40px; height: 6px; background: #b13e3e; border-radius: 3px; }
+        .ribbon span:nth-child(2) { width: 60px; background: #c93a3a; }
+        .ribbon span:nth-child(3) { width: 30px; background: #a52a2a; }
+        .intro-card { background: #fef4e9; border-left: 10px solid #b13e3e; padding: 1.8rem 2rem; border-radius: 0 30px 30px 0; margin-bottom: 2.5rem; box-shadow: 0 6px 14px rgba(0,0,0,0.03); }
+        .intro-card p { font-size: 1.2rem; font-weight: 500; color: #2e1e1e; margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 10px; }
+        .intro-card p:last-child { margin-bottom: 0; font-weight: 400; font-size: 1.08rem; color: #3f2c2c; display: block; }
+        .css-star { color: #b13e3e; font-size: 1.2rem; flex-shrink: 0; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin: 2.5rem 0; }
+        .info-box { background: #ffffff; border-radius: 24px; padding: 1.6rem 1.8rem; box-shadow: 0 6px 18px rgba(170, 70, 70, 0.08); border: 1px solid #f0dbd0; transition: transform 0.2s ease; }
+        .info-box:hover { transform: translateY(-3px); }
+        .info-box h3 { font-size: 1.5rem; color: #8b1e1e; border-left: 6px solid #b13e3e; padding-left: 14px; margin-bottom: 1.2rem; font-weight: 600; }
+        .info-box ul { list-style: none; }
+        .info-box li { margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 10px; font-size: 1.05rem; }
+        .info-box li strong { min-width: 90px; color: #7a2e2e; font-weight: 600; }
+        .story-section h2 { font-size: 2rem; color: #8b1e1e; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+        .story-section h2::before { content: "⚡"; color: #b13e3e; font-size: 2.2rem; }
+        .story-block { background: #fffaf5; border-radius: 24px; padding: 1.8rem 2rem; margin-bottom: 1.8rem; border: 1px solid #ebd9ce; }
+        .story-block p { margin-bottom: 1rem; font-size: 1.08rem; text-align: justify; }
+        .story-block strong { color: #9e2b2b; }
+        .slogan { background: #b13e3e; color: #fff5e6; font-size: 1.6rem; font-weight: 700; text-align: center; padding: 1.4rem 1.8rem; border-radius: 60px; margin: 2.5rem 0 1.8rem; letter-spacing: 2px; box-shadow: 0 8px 16px rgba(170, 40, 40, 0.3); font-style: italic; }
+        .timeline { display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 2.5rem; gap: 12px; }
+        .timeline-item { flex: 1 1 180px; background: #f9ede4; padding: 1.2rem 1rem; border-radius: 30px; text-align: center; border-bottom: 5px solid #b13e3e; box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+        .timeline-item .date { font-weight: 800; font-size: 1.3rem; color: #8b1e1e; display: block; margin-bottom: 6px; }
+        .timeline-item .desc { font-size: 0.98rem; color: #3d2b2b; }
+        .footer { margin-top: 2.8rem; padding-top: 1.5rem; text-align: center; border-top: 2px dashed #d4b9aa; font-size: 0.95rem; color: #7a5a4a; font-style: italic; }
+        @media (max-width: 700px) { .container { padding: 1.8rem 1.2rem; } .header h1 { font-size: 2rem; } .info-grid { grid-template-columns: 1fr; } .slogan { font-size: 1.3rem; } .timeline-item { flex: 1 1 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>延安</h1>
+            <div class="subhead">1935.10 - 1948.3 · 革命圣地 · 延安精神</div>
+            <div class="ribbon"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="intro-card">
+            <p><span class="css-star">★</span> 延安是中国革命的圣地，中共中央在此领导了抗日战争和解放战争，孕育了伟大的延安精神。</p>
+            <p>1935年10月，中央红军长征到达陕北。此后13年，延安成为中国人民解放斗争的总后方。毛泽东在这里写下了《论持久战》《实践论》等光辉著作，指引中国革命从胜利走向胜利。</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>⏳ 历史坐标</h3>
+                <ul>
+                    <li><strong>时间</strong><span>1935年10月 - 1948年3月</span></li>
+                    <li><strong>地点</strong><span>陕西延安</span></li>
+                    <li><strong>地位</strong><span>中共中央所在地、革命圣地</span></li>
+                    <li><strong>重大事件</strong><span>中共七大、大生产运动、整风运动</span></li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>🚩 延安精神</h3>
+                <p style="font-size: 1.05rem;">坚定正确的政治方向，解放思想、实事求是的思想路线，全心全意为人民服务的根本宗旨，自力更生、艰苦奋斗的创业精神。</p>
+            </div>
+        </div>
+
+        <div class="story-section">
+            <h2>红色故事 · 宝塔山下的烽火岁月</h2>
+            <div class="story-block">
+                <p><strong>1935年10月19日</strong>，中央红军历经两万五千里长征，到达陕北吴起镇。1937年1月，中共中央进驻延安。从此，这座陕北小城成为全中国热血青年向往的革命圣地。“到延安去！”成为当时最响亮的口号。</p>
+                <p>在延安的窑洞里，毛泽东运筹帷幄，写下了大量指导中国革命的光辉篇章。面对国民党的经济封锁，边区军民开展了轰轰烈烈的大生产运动，“自己动手、丰衣足食”，把荒凉的南泥湾变成了“陕北的好江南”。</p>
+            </div>
+            <div class="story-block">
+                <p><strong>1945年4月，中共七大在延安杨家岭召开。</strong> 确立了毛泽东思想为党的指导思想，为抗日战争的胜利和新民主主义革命的胜利奠定了政治和思想基础。1947年，面对国民党重兵进攻，中共中央主动撤离延安，转战陕北，最终迎来了全国解放的曙光。</p>
+            </div>
+        </div>
+
+        <div class="slogan">“ 几回回梦里回延安，双手搂定宝塔山！ ”</div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="date">1935.10</span>
+                <span class="desc">中央红军长征到达陕北</span>
+            </div>
+            <div class="timeline-item">
+                <span class="date">1937.1</span>
+                <span class="desc">中共中央进驻延安</span>
+            </div>
+            <div class="timeline-item">
+                <span class="date">1941-1942</span>
+                <span class="desc">大生产运动与整风运动</span>
+            </div>
+            <div class="timeline-item">
+                <span class="date">1945.4</span>
+                <span class="desc">中共七大胜利召开</span>
+            </div>
+            <div class="timeline-item">
+                <span class="date">1948.3</span>
+                <span class="desc">中共中央东渡黄河，离开陕北</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>⭐ 巍巍宝塔山，滚滚延河水 · 延安精神永放光芒 ⭐</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飞夺泸定桥 · 红色故事</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Roboto', sans-serif; background-color: #f5efe9; color: #2c2c2c; line-height: 1.7; padding: 2rem 1rem; }
+        .container { max-width: 1000px; margin: 0 auto; background: #fffcf8; border: 2px solid #b13e3e; border-radius: 18px; box-shadow: 0 12px 28px rgba(150, 0, 0, 0.15); padding: 2.5rem 2rem; position: relative; overflow: hidden; }
+        .container::before { content: "🌉"; position: absolute; top: 15px; left: 22px; font-size: 2rem; opacity: 0.25; }
+        .header { text-align: center; margin-bottom: 2.5rem; border-bottom: 3px solid #b13e3e; padding-bottom: 1.5rem; }
+        .header h1 { font-size: 2.8rem; color: #8b1e1e; letter-spacing: 3px; font-weight: 700; text-shadow: 1px 1px 0 #e0c9b0; margin-bottom: 0.5rem; }
+        .header .subhead { font-size: 1.2rem; color: #5e3a3a; font-style: italic; }
+        .ribbon { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+        .ribbon span { display: inline-block; width: 40px; height: 6px; background: #b13e3e; border-radius: 3px; }
+        .ribbon span:nth-child(2) { width: 60px; background: #c93a3a; }
+        .ribbon span:nth-child(3) { width: 30px; background: #a52a2a; }
+        .intro-card { background: #fef4e9; border-left: 10px solid #b13e3e; padding: 1.8rem 2rem; border-radius: 0 30px 30px 0; margin-bottom: 2.5rem; }
+        .intro-card p { font-size: 1.2rem; font-weight: 500; color: #2e1e1e; margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 10px; }
+        .intro-card p:last-child { font-weight: 400; font-size: 1.08rem; display: block; }
+        .css-star { color: #b13e3e; font-size: 1.2rem; flex-shrink: 0; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin: 2.5rem 0; }
+        .info-box { background: #ffffff; border-radius: 24px; padding: 1.6rem 1.8rem; box-shadow: 0 6px 18px rgba(170, 70, 70, 0.08); border: 1px solid #f0dbd0; }
+        .info-box h3 { font-size: 1.5rem; color: #8b1e1e; border-left: 6px solid #b13e3e; padding-left: 14px; margin-bottom: 1.2rem; }
+        .info-box ul { list-style: none; }
+        .info-box li { margin-bottom: 0.8rem; display: flex; gap: 10px; font-size: 1.05rem; }
+        .info-box li strong { min-width: 90px; color: #7a2e2e; }
+        .story-section h2 { font-size: 2rem; color: #8b1e1e; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+        .story-section h2::before { content: "⚡"; color: #b13e3e; }
+        .story-block { background: #fffaf5; border-radius: 24px; padding: 1.8rem 2rem; margin-bottom: 1.8rem; border: 1px solid #ebd9ce; }
+        .story-block p { margin-bottom: 1rem; font-size: 1.08rem; text-align: justify; }
+        .story-block strong { color: #9e2b2b; }
+        .slogan { background: #b13e3e; color: #fff5e6; font-size: 1.6rem; font-weight: 700; text-align: center; padding: 1.4rem 1.8rem; border-radius: 60px; margin: 2.5rem 0; font-style: italic; }
+        .footer { margin-top: 2.8rem; padding-top: 1.5rem; text-align: center; border-top: 2px dashed #d4b9aa; color: #7a5a4a; font-style: italic; }
+        @media (max-width: 700px) { .info-grid { grid-template-columns: 1fr; } .header h1 { font-size: 2rem; } .slogan { font-size: 1.3rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>飞夺泸定桥</h1>
+            <div class="subhead">1935.5.29 · 大渡桥横铁索寒</div>
+            <div class="ribbon"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="intro-card">
+            <p><span class="css-star">★</span> 22名突击队员冒着枪林弹雨，攀踏着悬空的13根铁索，夺取了泸定桥，为红军北上打开了通道。</p>
+            <p>1935年5月，红军在长征途中被大渡河天险所阻。蒋介石扬言要让红军成为“石达开第二”。红四团昼夜奔袭240里，在29日清晨赶到泸定桥西岸。22位勇士组成突击队，在火力掩护下，英勇夺桥，创造了军事史上的奇迹。</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>⏳ 历史坐标</h3>
+                <ul>
+                    <li><strong>时间</strong><span>1935年5月29日</span></li>
+                    <li><strong>地点</strong><span>四川泸定县泸定桥</span></li>
+                    <li><strong>参战部队</strong><span>红一方面军第一军团第二师第四团</span></li>
+                    <li><strong>突击队员</strong><span>22名勇士（廖大珠等）</span></li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>🚩 英雄壮举</h3>
+                <p>铁索桥长100余米，桥板被敌人抽去，只剩下13根寒光闪闪的铁索。勇士们冒着弹雨，在铁索上匍匐前进，最终夺下桥头，打开了红军北上的生命通道。</p>
+            </div>
+        </div>
+
+        <div class="story-section">
+            <h2>红色故事 · 铁索上的勇士</h2>
+            <div class="story-block">
+                <p><strong>5月29日拂晓</strong>，红四团经过一昼夜240里的急行军，奇迹般地赶到了泸定桥。桥面木板已被敌人拆去，只剩下13根铁索悬在咆哮的大渡河上。对岸桥头堡里机枪吐着火舌，桥下是奔腾的激流，令人心惊胆战。</p>
+                <p>下午4时，冲锋号响起。22名突击队员手持冲锋枪，背插马刀，腰缠手榴弹，冒着敌人的弹雨，手攀铁索，脚踩铁链，一寸一寸地向对岸挪动。子弹打在铁索上叮当作响，勇士们毫不退缩。当接近桥头时，敌人放起大火，勇士们奋不顾身冲入火海，与敌人展开肉搏，最终夺下了泸定桥。</p>
+            </div>
+        </div>
+
+        <div class="slogan">“ 大渡桥横铁索寒，红军不怕远征难！ ”</div>
+
+        <div class="footer">
+            <p>⭐ 致敬飞夺泸定桥的22名勇士 ⭐</p>
+        </div>
+    </div>
+</body>
+</html>
