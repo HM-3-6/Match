@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>红色旅游 · 注册</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #fdf2f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .register-box {
+      max-width: 440px;
+      width: 100%;
+      background: #fff;
+      border-radius: 1.5rem;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 40px -12px rgba(139, 0, 0, 0.25);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .header .stars {
+      color: #c62828;
+      font-size: 1.2rem;
+      letter-spacing: 0.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .header h1 {
+      font-size: 1.6rem;
+      color: #8b0000;
+      margin-bottom: 0.4rem;
+    }
+
+    .header p {
+      font-size: 0.9rem;
+      color: #a56a6a;
+    }
+
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #4a1c1c;
+      margin-bottom: 0.4rem;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap>i {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b76e6e;
+      font-size: 1rem;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      padding: 0.85rem 2.6rem 0.85rem 2.6rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      border: 1.5px solid #f0d9d9;
+      border-radius: 10px;
+      background: #fdf9f9;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .input-wrap input:focus {
+      border-color: #c62828;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.12);
+    }
+
+    .input-wrap input::placeholder {
+      color: #b99a9a;
+    }
+
+    .toggle-pwd {
+      position: absolute;
+      right: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #b76e6e;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.2rem;
+    }
+
+    .toggle-pwd:hover {
+      color: #c62828;
+    }
+
+    .agreement {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: #5a3333;
+      margin: 1.2rem 0 1.5rem;
+      line-height: 1.5;
+    }
+
+    .agreement input[type="checkbox"] {
+      accent-color: #c62828;
+      width: 1rem;
+      height: 1rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .agreement a {
+      color: #b71c1c;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .agreement a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-register {
+      width: 100%;
+      padding: 0.95rem;
+      background: linear-gradient(145deg, #c62828, #a01818);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px -4px rgba(198, 40, 40, 0.45);
+      transition: all 0.2s;
+    }
+
+    .btn-register:hover {
+      background: linear-gradient(145deg, #b71c1c, #8b0000);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px -4px rgba(198, 40, 40, 0.55);
+    }
+
+    .btn-register:active {
+      transform: translateY(1px);
+    }
+
+    .login-tip {
+      text-align: center;
+      margin-top: 1.4rem;
+      font-size: 0.9rem;
+      color: #7a5555;
+    }
+
+    .login-tip a {
+      color: #b71c1c;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 0.2rem;
+    }
+
+    .login-tip a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="register-box">
+    <div class="header">
+      <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <h1>创建账户</h1>
+      <p>加入红色旅游 · 开启红色之旅</p>
+    </div>
+
+    <form id="registerForm" action="#" method="POST" novalidate>
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <div class="input-wrap">
+          <i class="fas fa-user"></i>
+          <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">手机号</label>
+        <div class="input-wrap">
+          <i class="fas fa-mobile-alt"></i>
+          <input type="tel" id="phone" name="phone" placeholder="请输入手机号" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">设置密码</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="password" name="password" placeholder="8-20位，建议字母+数字" required>
+          <button type="button" class="toggle-pwd" id="togglePwd1"><i class="far fa-eye" id="eyeIcon1"></i></button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">确认密码</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="请再次输入密码" required>
+          <button type="button" class="toggle-pwd" id="togglePwd2"><i class="far fa-eye" id="eyeIcon2"></i></button>
+        </div>
+      </div>
+
+      <label class="agreement">
+        <input type="checkbox" id="agree" required>
+        <span>我已阅读并同意 <a href="#">《用户服务协议》</a> 和 <a href="#">《隐私政策》</a></span>
+      </label>
+
+      <button type="submit" class="btn-register">注 册</button>
+
+      <div class="login-tip">
+        已有账户？<a href="login.html">立即登录</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    /* ========== 1. 密码可见切换 ========== */
+    function setupPasswordToggle(inputId, btnId, iconId) {
+      const input = document.getElementById(inputId);
+      const btn = document.getElementById(btnId);
+      const icon = document.getElementById(iconId);
+      btn.addEventListener('click', () => {
+        const isPwd = input.type === 'password';
+        input.type = isPwd ? 'text' : 'password';
+        icon.className = isPwd ? 'far fa-eye-slash' : 'far fa-eye';
+      });
+    }
+    setupPasswordToggle('password', 'togglePwd1', 'eyeIcon1');
+    setupPasswordToggle('confirmPassword', 'togglePwd2', 'eyeIcon2');
+
+    /* ========== 2. 表单校验 + 注册成功跳转登录页 ========== */
+    const form = document.getElementById('registerForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // 阻止页面刷新
+
+      const username = document.getElementById('username').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const pwd = document.getElementById('password').value;
+      const confirm = document.getElementById('confirmPassword').value;
+      const agree = document.getElementById('agree').checked;
+
+      // --- 校验 1：用户名 ---
+      if (username.length < 2) {
+        alert('用户名至少需要 2 个字符');
+        return;
+      }
+
+      // --- 校验 2：手机号（简单 11 位数字校验） ---
+      if (!/^1[3-9]\d{9}$/.test(phone)) {
+        alert('请输入正确的 11 位手机号');
+        return;
+      }
+
+      // --- 校验 3：密码长度 ---
+      if (pwd.length < 8 || pwd.length > 20) {
+        alert('密码长度需为 8-20 位');
+        return;
+      }
+
+      // --- 校验 4：两次密码一致 ---
+      if (pwd !== confirm) {
+        alert('两次输入的密码不一致，请检查！');
+        return;
+      }
+
+      // --- 校验 5：是否勾选协议 ---
+      if (!agree) {
+        alert('请先阅读并同意用户服务协议和隐私政策');
+        return;
+      }
+
+      // ===== 校验全部通过，模拟注册成功 =====
+
+      const btn = document.querySelector('.btn-register');
+      btn.disabled = true;
+      btn.textContent = '注册中...';
+
+      // 模拟网络请求耗时 1 秒
+      setTimeout(() => {
+        alert('注册成功！即将跳转到登录页...');
+        // 跳转到登录页
+        window.location.href = 'login.html?from=register';
+      }, 1000);
+    });
+  </script>
+</body>
+
+</html>
