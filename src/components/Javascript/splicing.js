@@ -5,42 +5,42 @@ const redStories = [
         newImg: '南昌起义新.jpg',
         date: '1927年8月1日',
         title: '南昌起义',
-        link: 'https://baike.baidu.com/item/南昌起义'
+        link: '/src/nanchangUprising.html'
     },
     {
         oldImg: '井冈山茨坪旧.jpg',
         newImg: '井冈山茨坪新.jpg',
         date: '1927年10月—1929年',
         title: '井冈山革命根据地',
-        link: 'https://baike.baidu.com/item/井冈山革命根据地'
+        link: '/src/jingGangShan.html'
     },
     {
         oldImg: '于都浮桥旧.jpeg',
         newImg: '于都新.jpg',
         date: '1934年10月',
         title: '红军长征出发地',
-        link: 'https://baike.baidu.com/item/于都'
+        link: '/src/Yudu.html'
     },
     {
         oldImg: '泸定桥旧.jpg',
         newImg: '泸定桥新.jpg',
         date: '1935年5月29日',
         title: '飞夺泸定桥',
-        link: 'https://baike.baidu.com/item/飞夺泸定桥'
+        link: '/src/ludingBridge.html'
     },
     {
         oldImg: '遵义会议旧.jpg',
         newImg: '遵义会议新.jpg',
         date: '1935年1月',
         title: '遵义会议',
-        link: 'https://baike.baidu.com/item/遵义会议'
+        link: '/src/zunyiConference.html'
     },
     {
         oldImg: '延安旧.webp',
         newImg: '延安新.png',
         date: '1935年10月—1948年3月',
         title: '延安',
-        link: 'https://baike.baidu.com/item/延安'
+        link: '/src/yanAn.html'
     }
 ];
 // 用模板字符串拼接六张「新旧对比」卡片的 HTML
