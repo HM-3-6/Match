@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红军长征出发地 · 红色故事</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', 'Roboto', sans-serif; background-color: #f5efe9; color: #2c2c2c; line-height: 1.7; padding: 2rem 1rem; }
+        .container { max-width: 1000px; margin: 0 auto; background: #fffcf8; border: 2px solid #b13e3e; border-radius: 18px; box-shadow: 0 12px 28px rgba(150, 0, 0, 0.15); padding: 2.5rem 2rem; position: relative; overflow: hidden; }
+        .container::before { content: "🚩"; position: absolute; top: 15px; left: 22px; font-size: 2rem; opacity: 0.25; transform: rotate(-10deg); }
+        .header { text-align: center; margin-bottom: 2.5rem; border-bottom: 3px solid #b13e3e; padding-bottom: 1.5rem; position: relative; }
+        .header h1 { font-size: 2.8rem; color: #8b1e1e; letter-spacing: 3px; font-weight: 700; text-shadow: 1px 1px 0 #e0c9b0; margin-bottom: 0.5rem; }
+        .header .subhead { font-size: 1.2rem; color: #5e3a3a; font-style: italic; letter-spacing: 1px; }
+        .ribbon { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+        .ribbon span { display: inline-block; width: 40px; height: 6px; background: #b13e3e; border-radius: 3px; }
+        .ribbon span:nth-child(2) { width: 60px; background: #c93a3a; }
+        .ribbon span:nth-child(3) { width: 30px; background: #a52a2a; }
+        .intro-card { background: #fef4e9; border-left: 10px solid #b13e3e; padding: 1.8rem 2rem; border-radius: 0 30px 30px 0; margin-bottom: 2.5rem; box-shadow: 0 6px 14px rgba(0,0,0,0.03); }
+        .intro-card p { font-size: 1.2rem; font-weight: 500; color: #2e1e1e; margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 10px; }
+        .intro-card p:last-child { margin-bottom: 0; font-weight: 400; font-size: 1.08rem; color: #3f2c2c; display: block; }
+        .css-star { color: #b13e3e; font-size: 1.2rem; line-height: 1.2; flex-shrink: 0; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin: 2.5rem 0 2rem; }
+        .info-box { background: #ffffff; border-radius: 24px; padding: 1.6rem 1.8rem; box-shadow: 0 6px 18px rgba(170, 70, 70, 0.08); border: 1px solid #f0dbd0; transition: transform 0.2s ease; }
+        .info-box:hover { transform: translateY(-3px); }
+        .info-box h3 { font-size: 1.5rem; color: #8b1e1e; border-left: 6px solid #b13e3e; padding-left: 14px; margin-bottom: 1.2rem; font-weight: 600; }
+        .info-box ul { list-style: none; }
+        .info-box li { margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 10px; font-size: 1.05rem; }
+        .info-box li strong { min-width: 90px; color: #7a2e2e; font-weight: 600; }
+        .story-section { margin: 3rem 0 2rem; }
+        .story-section h2 { font-size: 2rem; color: #8b1e1e; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 12px; }
+        .story-section h2::before { content: "⚡"; font-size: 2.2rem; color: #b13e3e; }
+        .story-block { background: #fffaf5; border-radius: 24px; padding: 1.8rem 2rem; margin-bottom: 1.8rem; border: 1px solid #ebd9ce; }
+        .story-block p { margin-bottom: 1rem; font-size: 1.08rem; text-align: justify; }
+        .story-block strong { color: #9e2b2b; }
+        .slogan { background: #b13e3e; color: #fff5e6; font-size: 1.6rem; font-weight: 700; text-align: center; padding: 1.4rem 1.8rem; border-radius: 60px; margin: 2.5rem 0; letter-spacing: 2px; box-shadow: 0 8px 16px rgba(170, 40, 40, 0.3); font-style: italic; }
+        .footer { margin-top: 2.8rem; padding-top: 1.5rem; text-align: center; border-top: 2px dashed #d4b9aa; font-size: 0.95rem; color: #7a5a4a; font-style: italic; }
+        @media (max-width: 700px) { .info-grid { grid-template-columns: 1fr; } .header h1 { font-size: 2rem; } .slogan { font-size: 1.3rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>红军长征出发地</h1>
+            <div class="subhead">1934.10 · 伟大远征的起点</div>
+            <div class="ribbon"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="intro-card">
+            <p><span class="css-star">★</span> 1934年10月，中央红军8.6万余人从江西于都等地出发，踏上举世闻名的长征之路。</p>
+            <p>第五次反“围剿”失利后，中共中央和中央红军被迫实行战略转移。于都河畔，乡亲们搭浮桥、送粮草，目送红军远征。长征出发地不仅是地理上的起点，更是中国革命转危为安、走向胜利的伟大开端。</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>⏳ 历史坐标</h3>
+                <ul>
+                    <li><strong>时间</strong><span>1934年10月</span></li>
+                    <li><strong>主要出发地</strong><span>江西于都、瑞金等地</span></li>
+                    <li><strong>历史背景</strong><span>第五次反“围剿”失败，被迫战略转移</span></li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>🚩 精神内涵</h3>
+                <p style="margin-bottom: 10px; font-size: 1.05rem;">不畏艰难、不怕牺牲的革命英雄主义精神。</p>
+                <p style="font-size: 1.05rem;">于都人民“最后一碗米送去做军粮，最后一尺布用来缝军装”，军民鱼水情深。</p>
+            </div>
+        </div>
+
+        <div class="story-section">
+            <h2>红色故事 · 于都河畔的别离</h2>
+            <div class="story-block">
+                <p><strong>1934年10月17日傍晚</strong>，于都县城东门渡口，毛泽东、周恩来等率领中央红军主力渡过于都河。河面宽600多米，水深流急，当地百姓拆下自家门板、床板，甚至拿出寿材，帮助红军架起五座浮桥。</p>
+                <p>红军战士含泪告别乡亲，踏上漫漫征途。于都百姓在河畔唱起《十送红军》，歌声与波涛交织，成为长征史上最动人的场景之一。从此，长征的星火从这片土地燃向全中国。</p>
+            </div>
+        </div>
+
+        <div class="slogan">“ 长征出发，鱼水情深，万水千山只等闲！ ”</div>
+
+        <div class="footer">
+            <p>⭐ 铭记长征起点 · 传承红色基因 ⭐</p>
+        </div>
+    </div>
+</body>
+</html>
