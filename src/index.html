@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>。
+        <title>Document</title>
         <link rel="stylesheet" href="../src/static/css/index.css">
     </head>
 
@@ -15,54 +15,64 @@
             <div class="sub">一站式文化旅游资讯平台</div>
         </div>
 
-        <div class="wrap">
-            <div class="top">
-                <h2>&nbsp;&nbsp;精选旅游路线<span class="eng"> &nbsp;</span></h2>
-                <div class="topContent">
-                    <!--两条路线推荐-->
-                    <!--嵌入地图-->
-
-                </div>
+        <div class="labelCard">
+            <div class="tab-nav">
+                <div class="tab-item"><a href="#route"><strong>精选旅游路线</strong></a></div>
+                <div class="tab-item"><a href="#punchIn"><strong>云打卡&nbsp;/&nbsp;红色景点推荐</strong></a></div>
+                <div class="tab-item"><a href="#scenicSpot"><strong>红色景点推荐</strong></a></div>
             </div>
-            <div class="bottomBox">
-                <div class="leftBox">
-                    <div class="leftItem">
-                        <!--云打卡+数字勋章-->
-                        <h2>&nbsp;&nbsp;云打卡<span class="eng">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h2>
-                        <div class="leftItemContent"></div>
+            <div class="wrap">
+                <div class="top">
+                    <h2 id="route">&nbsp;&nbsp;精选旅游路线<span class="eng"> &nbsp;</span></h2>
+                    <div class="topContent">
+                        <!--两条路线推荐-->
+                        <!--嵌入地图-->
+
                     </div>
-                    <div class="leftItem">
-                        <div class="leftItem foodListContainer">
-                            <div class="sectionHeader simple">
-                                <h2>红色景点推荐</h2>
-                                <a href="adminConsole.html" target="_blank" class="more-guides-link">攻略查看 &rarr;</a>
+                </div>
+                <div class="bottomBox">
+                    <div class="leftBox">
+                        <div class="leftItem">
+                            <!--云打卡+数字勋章-->
+                            <h2 id="punchIn">&nbsp;&nbsp;云打卡<span class="eng">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h2>
+                            <div class="leftItemContent"></div>
+                        </div>
+                        <div class="leftItem">
+                            <div class="leftItem foodListContainer">
+                                <div class="sectionHeader simple">
+                                    <h2 id="scenicSpot">红色景点推荐</h2>
+                                    <a href="adminConsole.html" target="_blank" class="more-guides-link">攻略查看 &rarr;</a>
+                                </div>
+
+                                <ul class="foodList">
+                                    <!-- 景点1 -->
+
+                                    <!-- 景点2 -->
+
+                                    <!-- 景点3 -->
+
+                                    <!-- 景点4 -->
+
+                                    <!-- 景点5 -->
+
+                                    <!-- 景点6 -->
+
+                                </ul>
                             </div>
-
-                            <ul class="foodList">
-                                <!-- 景点1 -->
-
-                                <!-- 景点2 -->
-
-                                <!-- 景点3 -->
-
-                                <!-- 景点4 -->
-
-                                <!-- 景点5 -->
-
-                                <!-- 景点6 -->
-
-                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="rightBox">
-                    <div class="rightBoxHeader">
-                        <h2>&nbsp;&nbsp;红色故事区<span class="eng">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h2>
+                    <div class="rightBox">
+                        <div class="rightBoxHeader">
+                            <h2>&nbsp;&nbsp;红色故事区<span class="eng">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            </h2>
+                        </div>
+                        <div class="grid-container" id="redStoryGrid"></div>
                     </div>
-                    <div class="grid-container" id="redStoryGrid"></div>
                 </div>
             </div>
+
         </div>
+
 
 
         <footer>
@@ -72,11 +82,9 @@
 
 
         <!-- 搜索栏 -->
-        <script src="../javascript/tabNav.js"></script>
-        <script src="../javascript/search.js"></script>
-        <script src="../javascript/message.js"></script>
+        <!-- <script src="./components/Javascript/tabNav.js"></script> -->
+        <script src="./components/Javascript/message.js"></script>
         <script src="./components/Javascript/splicing.js?v=1.0" defer></script>
-        <script src="./components/Javascript/maps.js"></script>
     </body>
 
 </html>

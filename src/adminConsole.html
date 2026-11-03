@@ -1,744 +1,749 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>红色文旅管理后台</title>
-    <!-- 图表CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Microsoft YaHei", sans-serif;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>红色文旅管理后台</title>
+        <!-- 图表CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Microsoft YaHei", sans-serif;
+            }
 
-        body {
-            background: #f3f4f6;
-            display: flex;
-            overflow: hidden;
-        }
+            body {
+                background: #f3f4f6;
+                display: flex;
+                overflow: hidden;
+            }
 
-        /* 侧边栏 */
-        .sidebar {
-            width: 240px;
-            height: 100vh;
-            background: #111827;
-            color: #e5e7eb;
-            transition: width 0.3s ease;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
+            /* 侧边栏 */
+            .sidebar {
+                width: 240px;
+                height: 100vh;
+                background: #111827;
+                color: #e5e7eb;
+                transition: width 0.3s ease;
+                flex-shrink: 0;
+                overflow: hidden;
+            }
 
-        .sidebar.collapse {
-            width: 64px;
-        }
+            .sidebar.collapse {
+                width: 64px;
+            }
 
-        .sidebar-header {
-            height: 60px;
-            line-height: 60px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 1px solid #222b3b;
-        }
+            .sidebar-header {
+                height: 60px;
+                line-height: 60px;
+                text-align: center;
+                font-size: 18px;
+                font-weight: bold;
+                border-bottom: 1px solid #222b3b;
+            }
 
-        .sidebar.collapse .sidebar-header span {
-            display: none;
-        }
+            .sidebar.collapse .sidebar-header span {
+                display: none;
+            }
 
-        .menu-item {
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
+            .menu-item {
+                padding: 14px 20px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
 
-        .menu-item:hover {
-            background: #1f2937;
-        }
+            .menu-item:hover {
+                background: #1f2937;
+            }
 
-        .menu-item.active {
-            background: #2563eb;
-            color: #fff;
-        }
+            .menu-item.active {
+                background: #2563eb;
+                color: #fff;
+            }
 
-        .sidebar.collapse .menu-item span {
-            display: none;
-        }
+            .sidebar.collapse .menu-item span {
+                display: none;
+            }
 
-        .has-sub .arrow {
-            margin-left: auto;
-            transition: transform 0.2s;
-        }
+            .has-sub .arrow {
+                margin-left: auto;
+                transition: transform 0.2s;
+            }
 
-        .has-sub.open .arrow {
-            transform: rotate(180deg);
-        }
+            .has-sub.open .arrow {
+                transform: rotate(180deg);
+            }
 
-        .submenu {
-            background: #0f172a;
-            display: none;
-        }
+            .submenu {
+                background: #0f172a;
+                display: none;
+            }
 
-        .submenu.show {
-            display: block;
-        }
+            .submenu.show {
+                display: block;
+            }
 
-        .submenu .menu-item {
-            padding-left: 46px;
-        }
+            .submenu .menu-item {
+                padding-left: 46px;
+            }
 
-        /* 主容器 */
-        .main-wrap {
-            flex: 1;
-            height: 100vh;
-            overflow-y: auto;
-        }
+            /* 主容器 */
+            .main-wrap {
+                flex: 1;
+                height: 100vh;
+                overflow-y: auto;
+            }
 
-        .top-header {
-            height: 60px;
-            background: #fff;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-        }
+            .top-header {
+                height: 60px;
+                background: #fff;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 20px;
+            }
 
-        .toggle-btn {
-            border: none;
-            background: transparent;
-            font-size: 22px;
-            cursor: pointer;
-        }
+            .toggle-btn {
+                border: none;
+                background: transparent;
+                font-size: 22px;
+                cursor: pointer;
+            }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+            .user-info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
 
-        /* 内容区域 —— 撑满主区域，不再限制640px */
-        .content {
-            padding: 20px;
-        }
+            /* 内容区域 —— 撑满主区域，不再限制640px */
+            .content {
+                padding: 20px;
+            }
 
-        .page {
-            display: none;
-        }
+            .page {
+                display: none;
+            }
 
-        .page.active {
-            display: block;
-        }
+            .page.active {
+                display: block;
+            }
 
-        /* 统计卡片 */
-        .stat-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 20px;
-        }
+            /* 统计卡片 */
+            .stat-row {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 16px;
+                margin-bottom: 20px;
+            }
 
-        .stat-card {
-            padding: 24px;
-            border-radius: 10px;
-            color: #fff;
-        }
+            .stat-card {
+                padding: 24px;
+                border-radius: 10px;
+                color: #fff;
+            }
 
-        .stat-card:nth-child(1) {
-            background: #3b82f6;
-        }
+            .stat-card:nth-child(1) {
+                background: #3b82f6;
+            }
 
-        .stat-card:nth-child(2) {
-            background: #10b981;
-        }
+            .stat-card:nth-child(2) {
+                background: #10b981;
+            }
 
-        .stat-card:nth-child(3) {
-            background: #f97316;
-        }
+            .stat-card:nth-child(3) {
+                background: #f97316;
+            }
 
-        .stat-card:nth-child(4) {
-            background: #ef4444;
-        }
+            .stat-card:nth-child(4) {
+                background: #ef4444;
+            }
 
-        .stat-title {
-            font-size: 14px;
-            opacity: 0.9;
-        }
+            .stat-title {
+                font-size: 14px;
+                opacity: 0.9;
+            }
 
-        .stat-num {
-            font-size: 32px;
-            font-weight: bold;
-            margin-top: 8px;
-        }
+            .stat-num {
+                font-size: 32px;
+                font-weight: bold;
+                margin-top: 8px;
+            }
 
-        /* 通用卡片 */
-        .card {
-            background: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 1px 4px #ddd;
-        }
+            /* 通用卡片 */
+            .card {
+                background: #fff;
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 20px;
+                box-shadow: 0 1px 4px #ddd;
+            }
 
-        .card-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+            .card-head {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+            }
 
-        /* 按钮样式 */
-        .btn {
-            padding: 6px 14px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+            /* 按钮样式 */
+            .btn {
+                padding: 6px 14px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+            }
 
-        .btn-primary {
-            background: #2563eb;
-            color: #fff;
-        }
+            .btn-primary {
+                background: #2563eb;
+                color: #fff;
+            }
 
-        .btn-warning {
-            background: #f59e0b;
-            color: #fff;
-        }
+            .btn-warning {
+                background: #f59e0b;
+                color: #fff;
+            }
 
-        .btn-danger {
-            background: #ef4444;
-            color: #fff;
-        }
+            .btn-danger {
+                background: #ef4444;
+                color: #fff;
+            }
 
-        .btn-default {
-            background: #e5e7eb;
-            color: #333;
-        }
+            .btn-default {
+                background: #e5e7eb;
+                color: #333;
+            }
 
-        /* 搜索框 */
-        .search-input {
-            padding: 7px 12px;
-            width: 260px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-right: 10px;
-        }
+            /* 搜索框 */
+            .search-input {
+                padding: 7px 12px;
+                width: 260px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                margin-right: 10px;
+            }
 
-        /* 表格 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
+            /* 表格 */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+            }
 
-        th,
-        td {
-            border: 1px solid #e5e7eb;
-            padding: 10px;
-            text-align: center;
-            font-size: 14px;
-        }
+            th,
+            td {
+                border: 1px solid #e5e7eb;
+                padding: 10px;
+                text-align: center;
+                font-size: 14px;
+            }
 
-        th {
-            background: #f9fafb;
-        }
+            th {
+                background: #f9fafb;
+            }
 
-        /* 分页 */
-        .page-box {
-            margin-top: 15px;
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+            /* 分页 */
+            .page-box {
+                margin-top: 15px;
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
 
-        /* 弹窗遮罩 */
-        .mask {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-        }
+            /* 弹窗遮罩 */
+            .mask {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: none;
+                align-items: center;
+                justify-content: center;
+                z-index: 999;
+            }
 
-        .mask.show {
-            display: flex;
-        }
+            .mask.show {
+                display: flex;
+            }
 
-        .modal {
-            width: 480px;
-            background: #fff;
-            border-radius: 8px;
-            padding: 25px;
-        }
+            .modal {
+                width: 480px;
+                background: #fff;
+                border-radius: 8px;
+                padding: 25px;
+            }
 
-        .modal h3 {
-            margin-bottom: 20px;
-        }
+            .modal h3 {
+                margin-bottom: 20px;
+            }
 
-        .form-item {
-            margin-bottom: 15px;
-        }
+            .form-item {
+                margin-bottom: 15px;
+            }
 
-        .form-item label {
-            display: block;
-            margin-bottom: 6px;
-        }
+            .form-item label {
+                display: block;
+                margin-bottom: 6px;
+            }
 
-        .form-item input,
-        .form-item select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
+            .form-item input,
+            .form-item select {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
 
-        .modal-btn-group {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
+            .modal-btn-group {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+                margin-top: 20px;
+            }
 
-        /* 提示弹窗 */
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 12px 20px;
-            background: #10b981;
-            color: #fff;
-            border-radius: 4px;
-            display: none;
-            z-index: 1000;
-        }
+            /* 提示弹窗 */
+            .toast {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                background: #10b981;
+                color: #fff;
+                border-radius: 4px;
+                display: none;
+                z-index: 1000;
+            }
 
-        /* 开关状态 */
-        .switch {
-            width: 40px;
-            height: 20px;
-            background: #ccc;
-            border-radius: 20px;
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
+            /* 开关状态 */
+            .switch {
+                width: 40px;
+                height: 20px;
+                background: #ccc;
+                border-radius: 20px;
+                position: relative;
+                display: inline-block;
+                cursor: pointer;
+            }
 
-        .switch::after {
-            content: '';
-            width: 16px;
-            height: 16px;
-            background: #fff;
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            transition: 0.2s;
-        }
+            .switch::after {
+                content: '';
+                width: 16px;
+                height: 16px;
+                background: #fff;
+                border-radius: 50%;
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                transition: 0.2s;
+            }
 
-        .switch.on {
-            background: #2563eb;
-        }
+            .switch.on {
+                background: #2563eb;
+            }
 
-        .switch.on::after {
-            left: 22px;
-        }
+            .switch.on::after {
+                left: 22px;
+            }
 
-        /* 图表容器 —— 高度加大，宽度自动撑满 */
-        .chart-box {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-</head>
+            /* 图表容器 —— 高度加大，宽度自动撑满 */
+            .chart-box {
+                height: 400px;
+                width: 100%;
+            }
+        </style>
+    </head>
 
-<body>
-    <!-- 侧边导航 -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <span>红色文旅管理后台</span>
-        </div>
-        <div class="menu-list">
-            <div class="menu-item active" data-page="dashboard">
-                <span>📊</span> <span>数据看板</span>
+    <body>
+        <!-- 侧边导航 -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span>红色文旅管理后台</span>
             </div>
-            <div class="menu-item has-sub">
-                <span>👥</span> <span>地点管理</span>
-                <span class="arrow">▼</span>
-            </div>
-            <div class="submenu">
-                <div class="menu-item" data-page="userList">地点列表</div>
-            </div>
-            <div class="menu-item has-sub">
-                <span>👨‍🏫</span> <span>打卡平台</span>
-                <span class="arrow">▼</span>
-            </div>
-            <div class="submenu">
-                <div class="menu-item" data-page="teacherList">打卡列表</div>
-            </div>
-            <div class="menu-item has-sub">
-                <span>📚</span> <span>用户调研</span>
-                <span class="arrow">▼</span>
-            </div>
-            <div class="submenu">
-                <div class="menu-item" data-page="courseList">调研列表</div>
-            </div>
-            <div class="menu-item" data-page="system">
-                <span>⚙️</span> <span>系统设置</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 主内容区 -->
-    <div class="main-wrap">
-        <div class="top-header">
-            <button class="toggle-btn" id="toggleSidebar">☰</button>
-            <div class="user-info">管理员 Admin</div>
-        </div>
-        <div class="content" id="pageContainer">
-            <!-- 数据看板页面 -->
-            <div id="dashboard" class="page active">
-                <div class="stat-row">
-                    <div class="stat-card">
-                        <div class="stat-title">总注册用户</div>
-                        <div class="stat-num">189.2万</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">全部打卡</div>
-                        <div class="stat-num">100万+</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">在线分享</div>
-                        <div class="stat-num">100万</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-title">今日新增</div>
-                        <div class="stat-num">99.1万</div>
-                    </div>
+            <div class="menu-list">
+                <div class="menu-item active" data-page="dashboard">
+                    <span>📊</span> <span>数据看板</span>
                 </div>
-                <div class="card">
-                    <div class="card-head">
-                        <h3>数据统计图表</h3>
-                    </div>
-                    <div class="chart-box">
-                        <canvas id="dataChart"></canvas>
-                    </div>
+                <div class="menu-item has-sub">
+                    <span>👥</span> <span>地点管理</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="submenu">
+                    <div class="menu-item" data-page="userList">地点列表</div>
+                </div>
+                <div class="menu-item has-sub">
+                    <span>👨‍🏫</span> <span>打卡平台</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="submenu">
+                    <div class="menu-item" data-page="teacherList">打卡列表</div>
+                </div>
+                <div class="menu-item has-sub">
+                    <span>📚</span> <span>用户调研</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="submenu">
+                    <div class="menu-item" data-page="courseList">调研列表</div>
+                </div>
+                <div class="menu-item" data-page="system">
+                    <span>⚙️</span> <span>系统设置</span>
                 </div>
             </div>
+        </div>
 
-            <!-- 用户列表页面 -->
-            <div id="userList" class="page">
-                <div class="card">
-                    <div class="card-head">
-                        <h3>地点管理列表</h3>
-                        <div>
-                            <input class="search-input" id="userSearch" placeholder="搜索地点/景点">
-                            <button class="btn btn-primary" id="addUserBtn">新增地点</button>
-                            <button class="btn btn-danger" id="batchDelUser">批量删除</button>
-                            <button class="btn btn-default" id="exportUser">导出数据</button>
+        <!-- 主内容区 -->
+        <div class="main-wrap">
+            <div class="top-header">
+                <button class="toggle-btn" id="toggleSidebar">☰</button>
+                <div class="user-info">管理员 Admin</div>
+            </div>
+            <div class="content" id="pageContainer">
+                <!-- 数据看板页面 -->
+                <div id="dashboard" class="page active">
+                    <div class="stat-row">
+                        <div class="stat-card">
+                            <div class="stat-title">总注册用户</div>
+                            <div class="stat-num">189.2万</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">全部打卡</div>
+                            <div class="stat-num">100万+</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">在线分享</div>
+                            <div class="stat-num">100万</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">今日新增</div>
+                            <div class="stat-num">99.1万</div>
                         </div>
                     </div>
-                    <table id="userTable">
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" id="userAllCheck"></th>
-                                <th>ID</th>
-                                <th>地点</th>
-                                <th>景点</th>
-                                <th>开放时间</th>
-                                <th>开放状态</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                    <div class="page-box" id="userPage"></div>
-                </div>
-            </div>
-
-            <!-- 教师列表页面 -->
-            <div id="teacherList" class="page">
-                <div class="card">
-                    <div class="card-head">
-                        <h3>打卡管理列表</h3>
-                        <button class="btn btn-primary" id="addTeacherBtn">新增打卡</button>
-                    </div>
-                    <table id="teacherTable">
-                        <thead>
-                            <tr>
-                                <th>打卡ID</th>
-                                <th>用户名</th>
-                                <th>打卡地点</th>
-                                <th>打卡次数</th>
-                                <th>评价</th>
-                                <th>打卡状态</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 用户调研页面 -->
-            <div id="courseList" class="page">
-                <div class="card">
-                    <div style="text-align:center; font-size:24px; color:#c78f22; margin-bottom:30px; letter-spacing:3px;">
-                        —— 用户调研 ——
-                    </div>
-
-                    <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
-                        <p style="margin-bottom:10px; font-weight:bold;">1. 请问您到红色旅游景点参观过吗？</p>
-                        <div style="margin-left:20px;">
-                            <label style="display:block; margin:6px 0; font-weight:normal;">
-                                <input type="radio" name="q1" value="有过"> 有过
-                            </label>
-                            <label style="display:block; margin:6px 0; font-weight:normal;">
-                                <input type="radio" name="q1" value="没有"> 没有
-                            </label>
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>数据统计图表</h3>
+                        </div>
+                        <div class="chart-box">
+                            <canvas id="dataChart"></canvas>
                         </div>
                     </div>
+                </div>
 
-                    <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
-                        <p style="margin-bottom:10px; font-weight:bold;">2. 您最喜欢/最想去哪几个红色旅游景点？</p>
-                        <div style="margin-left:20px;">
-                            <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
-                                <input type="checkbox" name="q2" value="遵义会议会址"> 遵义会议会址
-                            </label>
-                            <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
-                                <input type="checkbox" name="q2" value="泸定桥"> 泸定桥
-                            </label>
-                            <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
-                                <input type="checkbox" name="q2" value="延安"> 延安
-                            </label>
-                            <br>
-                            <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
-                                <input type="checkbox" name="q2" value="西柏坡"> 西柏坡
-                            </label>
-                            <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
-                                <input type="checkbox" name="q2" value="井冈山"> 井冈山
-                            </label>
-                            <div style="margin-top:10px;">
-                                其他：<input type="text" style="padding:5px; width:200px; border:1px solid #ddd; border-radius:3px;">
+                <!-- 用户列表页面 -->
+                <div id="userList" class="page">
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>地点管理列表</h3>
+                            <div>
+                                <input class="search-input" id="userSearch" placeholder="搜索地点/景点">
+                                <button class="btn btn-primary" id="addUserBtn">新增地点</button>
+                                <button class="btn btn-danger" id="batchDelUser">批量删除</button>
+                                <button class="btn btn-default" id="exportUser">导出数据</button>
                             </div>
                         </div>
+                        <table id="userTable">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="userAllCheck"></th>
+                                    <th>ID</th>
+                                    <th>地点</th>
+                                    <th>景点</th>
+                                    <th>开放时间</th>
+                                    <th>开放状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <div class="page-box" id="userPage"></div>
                     </div>
+                </div>
 
-                    <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
-                        <p style="margin-bottom:10px; font-weight:bold;">3. 您通常会和几人结伴去红色旅游？</p>
-                        <div style="margin-left:20px;">
-                            <select style="padding:6px 12px; border:1px solid #ddd; border-radius:4px; font-size:14px;">
-                                <option value="">-请选择-</option>
-                                <option value="独自一人">独自一人</option>
-                                <option value="2-3人">2-3人</option>
-                                <option value="4-6人">4-6人</option>
-                                <option value="6人以上">6人以上</option>
-                            </select>
+                <!-- 教师列表页面 -->
+                <div id="teacherList" class="page">
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>打卡管理列表</h3>
+                            <button class="btn btn-primary" id="addTeacherBtn">新增打卡</button>
+                        </div>
+                        <table id="teacherTable">
+                            <thead>
+                                <tr>
+                                    <th>打卡ID</th>
+                                    <th>用户名</th>
+                                    <th>打卡地点</th>
+                                    <th>打卡次数</th>
+                                    <th>评价</th>
+                                    <th>打卡状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 用户调研页面 -->
+                <div id="courseList" class="page">
+                    <div class="card">
+                        <div
+                            style="text-align:center; font-size:24px; color:#c78f22; margin-bottom:30px; letter-spacing:3px;">
+                            —— 用户调研 ——
+                        </div>
+
+                        <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
+                            <p style="margin-bottom:10px; font-weight:bold;">1. 请问您到红色旅游景点参观过吗？</p>
+                            <div style="margin-left:20px;">
+                                <label style="display:block; margin:6px 0; font-weight:normal;">
+                                    <input type="radio" name="q1" value="有过"> 有过
+                                </label>
+                                <label style="display:block; margin:6px 0; font-weight:normal;">
+                                    <input type="radio" name="q1" value="没有"> 没有
+                                </label>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
+                            <p style="margin-bottom:10px; font-weight:bold;">2. 您最喜欢/最想去哪几个红色旅游景点？</p>
+                            <div style="margin-left:20px;">
+                                <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
+                                    <input type="checkbox" name="q2" value="遵义会议会址"> 遵义会议会址
+                                </label>
+                                <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
+                                    <input type="checkbox" name="q2" value="泸定桥"> 泸定桥
+                                </label>
+                                <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
+                                    <input type="checkbox" name="q2" value="延安"> 延安
+                                </label>
+                                <br>
+                                <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
+                                    <input type="checkbox" name="q2" value="西柏坡"> 西柏坡
+                                </label>
+                                <label style="display:inline-block; margin:6px 15px 6px 0; font-weight:normal;">
+                                    <input type="checkbox" name="q2" value="井冈山"> 井冈山
+                                </label>
+                                <div style="margin-top:10px;">
+                                    其他：<input type="text"
+                                        style="padding:5px; width:200px; border:1px solid #ddd; border-radius:3px;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
+                            <p style="margin-bottom:10px; font-weight:bold;">3. 您通常会和几人结伴去红色旅游？</p>
+                            <div style="margin-left:20px;">
+                                <select
+                                    style="padding:6px 12px; border:1px solid #ddd; border-radius:4px; font-size:14px;">
+                                    <option value="">-请选择-</option>
+                                    <option value="独自一人">独自一人</option>
+                                    <option value="2-3人">2-3人</option>
+                                    <option value="4-6人">4-6人</option>
+                                    <option value="6人以上">6人以上</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
+                            <p style="margin-bottom:10px; font-weight:bold;">4. 您通常红色旅游会安排几天？</p>
+                            <div style="margin-left:20px;">
+                                <label style="display:block; margin:6px 0; font-weight:normal;">
+                                    <input type="radio" name="q4" value="1天"> 1天
+                                </label>
+                                <label style="display:block; margin:6px 0; font-weight:normal;">
+                                    <input type="radio" name="q4" value="2-3天"> 2-3天
+                                </label>
+                                <label style="display:block; margin:6px 0; font-weight:normal;">
+                                    <input type="radio" name="q4" value="4-7天"> 4-7天
+                                </label>
+                                <label style="display:block; margin:6px 0; font-weight:normal;">
+                                    <input type="radio" name="q4" value="7天以上"> 7天以上
+                                </label>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
+                            <p style="margin-bottom:10px; font-weight:bold;">5. 您对我们红色文旅服务有什么建议？</p>
+                            <div style="margin-left:20px;">
+                                <textarea
+                                    style="width:100%; max-width:500px; height:100px; padding:8px; border:1px solid #ddd; border-radius:4px; resize:vertical;"></textarea>
+                            </div>
+                        </div>
+
+                        <div style="text-align:center; margin-top:30px;">
+                            <button class="btn btn-primary" id="submitSurveyBtn"
+                                style="padding:10px 40px; font-size:16px; background:#c78f22;">提交调研</button>
                         </div>
                     </div>
+                </div>
 
-                    <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
-                        <p style="margin-bottom:10px; font-weight:bold;">4. 您通常红色旅游会安排几天？</p>
-                        <div style="margin-left:20px;">
-                            <label style="display:block; margin:6px 0; font-weight:normal;">
-                                <input type="radio" name="q4" value="1天"> 1天
-                            </label>
-                            <label style="display:block; margin:6px 0; font-weight:normal;">
-                                <input type="radio" name="q4" value="2-3天"> 2-3天
-                            </label>
-                            <label style="display:block; margin:6px 0; font-weight:normal;">
-                                <input type="radio" name="q4" value="4-7天"> 4-7天
-                            </label>
-                            <label style="display:block; margin:6px 0; font-weight:normal;">
-                                <input type="radio" name="q4" value="7天以上"> 7天以上
-                            </label>
+                <!-- 系统设置页面 -->
+                <div id="system" class="page">
+                    <div class="card">
+                        <div class="card-head">
+                            <h3>系统基础配置</h3>
                         </div>
-                    </div>
-
-                    <div style="margin-bottom:24px; font-size:16px; line-height:1.8;">
-                        <p style="margin-bottom:10px; font-weight:bold;">5. 您对我们红色文旅服务有什么建议？</p>
-                        <div style="margin-left:20px;">
-                            <textarea style="width:100%; max-width:500px; height:100px; padding:8px; border:1px solid #ddd; border-radius:4px; resize:vertical;"></textarea>
+                        <div class="form-item">
+                            <label>系统名称</label>
+                            <input value="红色文旅管理后台">
                         </div>
-                    </div>
-
-                    <div style="text-align:center; margin-top:30px;">
-                        <button class="btn btn-primary" id="submitSurveyBtn" style="padding:10px 40px; font-size:16px; background:#c78f22;">提交调研</button>
+                        <div class="form-item">
+                            <label>管理员密码</label>
+                            <input type="password" value="123456">
+                        </div>
+                        <div class="form-item">
+                            <label>首页统计自动刷新</label>
+                            <div class="switch on" id="refreshSwitch"></div>
+                        </div>
+                        <button class="btn btn-primary" id="saveSysBtn">保存配置</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- 系统设置页面 -->
-            <div id="system" class="page">
-                <div class="card">
-                    <div class="card-head">
-                        <h3>系统基础配置</h3>
-                    </div>
-                    <div class="form-item">
-                        <label>系统名称</label>
-                        <input value="红色文旅管理后台">
-                    </div>
-                    <div class="form-item">
-                        <label>管理员密码</label>
-                        <input type="password" value="123456">
-                    </div>
-                    <div class="form-item">
-                        <label>首页统计自动刷新</label>
-                        <div class="switch on" id="refreshSwitch"></div>
-                    </div>
-                    <button class="btn btn-primary" id="saveSysBtn">保存配置</button>
+        <!-- 新增/编辑用户弹窗 -->
+        <div class="mask" id="userModal">
+            <div class="modal">
+                <h3 id="userModalTitle">新增地点</h3>
+                <input type="hidden" id="editUserId">
+                <div class="form-item">
+                    <label>地点</label>
+                    <input id="uName">
+                </div>
+                <div class="form-item">
+                    <label>景点</label>
+                    <input id="uPhone">
+                </div>
+                <div class="modal-btn-group">
+                    <button class="btn btn-default" id="closeUserModal">取消</button>
+                    <button class="btn btn-primary" id="saveUser">保存</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- 新增/编辑用户弹窗 -->
-    <div class="mask" id="userModal">
-        <div class="modal">
-            <h3 id="userModalTitle">新增地点</h3>
-            <input type="hidden" id="editUserId">
-            <div class="form-item">
-                <label>地点</label>
-                <input id="uName">
-            </div>
-            <div class="form-item">
-                <label>景点</label>
-                <input id="uPhone">
-            </div>
-            <div class="modal-btn-group">
-                <button class="btn btn-default" id="closeUserModal">取消</button>
-                <button class="btn btn-primary" id="saveUser">保存</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 新增/编辑教师弹窗 -->
-    <div class="mask" id="teacherModal">
-        <div class="modal">
-            <h3 id="teacherModalTitle">新增打卡</h3>
-            <input type="hidden" id="editTeacherId">
-            <div class="form-item">
-                <label>用户名</label>
-                <input id="tName">
-            </div>
-            <div class="form-item">
-                <label>打卡地点</label>
-                <input id="tSubject">
-            </div>
-            <div class="form-item">
-                <label>打卡次数</label>
-                <input id="tYear">
-            </div>
-            <div class="form-item">
-                <label>评价</label>
-                <input id="tPhone">
-            </div>
-            <div class="modal-btn-group">
-                <button class="btn btn-default" id="closeTeacherModal">取消</button>
-                <button class="btn btn-primary" id="saveTeacher">保存</button>
+        <!-- 新增/编辑教师弹窗 -->
+        <div class="mask" id="teacherModal">
+            <div class="modal">
+                <h3 id="teacherModalTitle">新增打卡</h3>
+                <input type="hidden" id="editTeacherId">
+                <div class="form-item">
+                    <label>用户名</label>
+                    <input id="tName">
+                </div>
+                <div class="form-item">
+                    <label>打卡地点</label>
+                    <input id="tSubject">
+                </div>
+                <div class="form-item">
+                    <label>打卡次数</label>
+                    <input id="tYear">
+                </div>
+                <div class="form-item">
+                    <label>评价</label>
+                    <input id="tPhone">
+                </div>
+                <div class="modal-btn-group">
+                    <button class="btn btn-default" id="closeTeacherModal">取消</button>
+                    <button class="btn btn-primary" id="saveTeacher">保存</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- 消息提示 -->
-    <div class="toast" id="toast"></div>
+        <!-- 消息提示 -->
+        <div class="toast" id="toast"></div>
 
-    <script>
-        // 全局提示方法
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.style.display = 'block';
-            setTimeout(function () { toast.style.display = 'none' }, 1500);
-        }
-
-        let userList = [
-            { id: 1, name: "江西于都", spot: "中央红军长征第一渡纪念碑园", time: "2026-01-12", status: true },
-            { id: 2, name: "广西湘江", spot: "红军长征湘江战役纪念园", time: "2026-02-05", status: true },
-            { id: 3, name: "贵州遵义", spot: "遵义会议会址", time: "2026-03-18", status: false },
-            { id: 4, name: "四川泸定桥", spot: "泸定桥", time: "2026-04-10", status: true },
-            { id: 5, name: "四川夹金山", spot: "夹金山风景区", time: "2026-05-22", status: false },
-            { id: 6, name: "陕西吴起镇", spot: "吴起镇", time: "2026-05-22", status: false }
-        ]
-        let teacherList = [
-            { id: 1, name: "刘梅", spot: "贵州遵义", number: 8, comment: "青山藏风骨，红韵润人心", status: true },
-            { id: 2, name: "王刚", spot: "泸定桥", number: 12, comment: "来泸定桥打卡，缅怀革命先辈，深受感动", status: true },
-            { id: 3, name: "陈丽", spot: "吴起镇", number: 5, comment: "风景不错，红色文化浓厚，值得一来", status: false }
-        ]
-        let courseList = [
-            { id: 1, name: "对红色景点的满意度如何？", teacher: "刘梅", time: 1280, price: 356, status: true },
-            { id: 2, name: "您最想了解哪个红色历史？", teacher: "王刚", time: 2560, price: 521, status: true },
-            { id: 3, name: "您更喜欢哪种讲解方式？", teacher: "陈丽", time: 890, price: 233, status: false }
-        ]
-        let userId = 7, teacherId = 4, courseId = 4;
-        let userPageNum = 1, userPageSize = 3;
-
-        // 侧边栏折叠
-        const sidebar = document.getElementById('sidebar')
-        document.getElementById('toggleSidebar').onclick = () => {
-            sidebar.classList.toggle('collapse')
-        }
-
-        // 二级菜单展开收起
-        document.querySelectorAll('.has-sub').forEach(item => {
-            item.onclick = function () {
-                this.classList.toggle('open')
-                this.nextElementSibling.classList.toggle('show')
+        <script>
+            // 全局提示方法
+            function showToast(msg) {
+                const toast = document.getElementById('toast');
+                toast.innerText = msg;
+                toast.style.display = 'block';
+                setTimeout(function () { toast.style.display = 'none' }, 1500);
             }
-        })
 
-        // 页面切换逻辑
-        document.querySelectorAll('.menu-item[data-page]').forEach(item => {
-            item.onclick = function () {
-                document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'))
-                this.classList.add('active')
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
-                const pageId = this.getAttribute('data-page')
-                document.getElementById(pageId).classList.add('active')
-                if (pageId === 'userList') renderUserTable();
-                if (pageId === 'teacherList') renderTeacherTable();
+            let userList = [
+                { id: 1, name: "江西于都", spot: "中央红军长征第一渡纪念碑园", time: "2026-01-12", status: true },
+                { id: 2, name: "广西湘江", spot: "红军长征湘江战役纪念园", time: "2026-02-05", status: true },
+                { id: 3, name: "贵州遵义", spot: "遵义会议会址", time: "2026-03-18", status: false },
+                { id: 4, name: "四川泸定桥", spot: "泸定桥", time: "2026-04-10", status: true },
+                { id: 5, name: "四川夹金山", spot: "夹金山风景区", time: "2026-05-22", status: false },
+                { id: 6, name: "陕西吴起镇", spot: "吴起镇", time: "2026-05-22", status: false }
+            ]
+            let teacherList = [
+                { id: 1, name: "刘梅", spot: "贵州遵义", number: 8, comment: "青山藏风骨，红韵润人心", status: true },
+                { id: 2, name: "王刚", spot: "泸定桥", number: 12, comment: "来泸定桥打卡，缅怀革命先辈，深受感动", status: true },
+                { id: 3, name: "陈丽", spot: "吴起镇", number: 5, comment: "风景不错，红色文化浓厚，值得一来", status: false }
+            ]
+            let courseList = [
+                { id: 1, name: "对红色景点的满意度如何？", teacher: "刘梅", time: 1280, price: 356, status: true },
+                { id: 2, name: "您最想了解哪个红色历史？", teacher: "王刚", time: 2560, price: 521, status: true },
+                { id: 3, name: "您更喜欢哪种讲解方式？", teacher: "陈丽", time: 890, price: 233, status: false }
+            ]
+            let userId = 7, teacherId = 4, courseId = 4;
+            let userPageNum = 1, userPageSize = 3;
+
+            // 侧边栏折叠
+            const sidebar = document.getElementById('sidebar')
+            document.getElementById('toggleSidebar').onclick = () => {
+                sidebar.classList.toggle('collapse')
             }
-        })
 
-        // 初始化图表 —— 撑满宽度
-        const chartCtx = document.getElementById('dataChart').getContext('2d');
-        new Chart(chartCtx, {
-            type: 'bar',
-            data: {
-                labels: ['江西于都', '广西湘江', '贵州遵义', '四川泸定桥', '四川夹金山', '陕西吴起镇'],
-                datasets: [{
-                    label: '旅游人数',
-                    data: [462, 272.9, 702, 573.52, 151, 50],
-                    backgroundColor: '#3b82f6'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        })
+            // 二级菜单展开收起
+            document.querySelectorAll('.has-sub').forEach(item => {
+                item.onclick = function () {
+                    this.classList.toggle('open')
+                    this.nextElementSibling.classList.toggle('show')
+                }
+            })
 
-        // ========== 地点管理模块 ==========
-        function renderUserTable() {
-            const tbody = document.querySelector('#userTable tbody');
-            tbody.innerHTML = '';
-            const start = (userPageNum - 1) * userPageSize;
-            const end = start + userPageSize;
-            const pageData = userList.slice(start, end);
-            pageData.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
+            // 页面切换逻辑
+            document.querySelectorAll('.menu-item[data-page]').forEach(item => {
+                item.onclick = function () {
+                    document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'))
+                    this.classList.add('active')
+                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
+                    const pageId = this.getAttribute('data-page')
+                    document.getElementById(pageId).classList.add('active')
+                    if (pageId === 'userList') renderUserTable();
+                    if (pageId === 'teacherList') renderTeacherTable();
+                }
+            })
+
+            // 初始化图表 —— 撑满宽度
+            const chartCtx = document.getElementById('dataChart').getContext('2d');
+            new Chart(chartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['江西于都', '广西湘江', '贵州遵义', '四川泸定桥', '四川夹金山', '陕西吴起镇'],
+                    datasets: [{
+                        label: '旅游人数',
+                        data: [462, 272.9, 702, 573.52, 151, 50],
+                        backgroundColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            })
+
+            // ========== 地点管理模块 ==========
+            function renderUserTable() {
+                const tbody = document.querySelector('#userTable tbody');
+                tbody.innerHTML = '';
+                const start = (userPageNum - 1) * userPageSize;
+                const end = start + userPageSize;
+                const pageData = userList.slice(start, end);
+                pageData.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
           <td><input type="checkbox" class="userCheck" data-id="${item.id}"></td>
           <td>${item.id}</td>
           <td>${item.name}</td>
@@ -750,95 +755,95 @@
             <button class="btn btn-danger delUser" data-id="${item.id}">删除</button>
           </td>
         `
-                tbody.appendChild(tr);
-            })
-            // 分页渲染
-            const pageBox = document.getElementById('userPage');
-            pageBox.innerHTML = `
+                    tbody.appendChild(tr);
+                })
+                // 分页渲染
+                const pageBox = document.getElementById('userPage');
+                pageBox.innerHTML = `
         <button class="btn btn-default" id="userPrev">上一页</button>
         <span>当前第${userPageNum}页</span>
         <button class="btn btn-default" id="userNext">下一页</button>
       `
-            document.getElementById('userPrev').onclick = () => {
-                if (userPageNum > 1) { userPageNum--; renderUserTable(); }
-            }
-            document.getElementById('userNext').onclick = () => {
-                if (userPageNum * userPageSize < userList.length) { userPageNum++; renderUserTable(); }
-            }
-            // 单行删除
-            document.querySelectorAll('.delUser').forEach(btn => {
-                btn.onclick = function () {
-                    const delId = Number(this.dataset.id);
-                    userList = userList.filter(u => u.id !== delId);
-                    renderUserTable();
-                    showToast('删除成功');
+                document.getElementById('userPrev').onclick = () => {
+                    if (userPageNum > 1) { userPageNum--; renderUserTable(); }
                 }
-            })
-            // 编辑地点
-            document.querySelectorAll('.editUser').forEach(btn => {
-                btn.onclick = function () {
-                    const eid = Number(this.dataset.id);
-                    const user = userList.find(u => u.id === eid);
-                    document.getElementById('editUserId').value = eid;
-                    document.getElementById('userModalTitle').innerText = '编辑地点';
-                    document.getElementById('uName').value = user.name;
-                    document.getElementById('uPhone').value = user.spot;
-                    document.getElementById('userModal').classList.add('show');
+                document.getElementById('userNext').onclick = () => {
+                    if (userPageNum * userPageSize < userList.length) { userPageNum++; renderUserTable(); }
                 }
-            })
-        }
-
-        // 全选
-        document.getElementById('userAllCheck').onchange = function () {
-            document.querySelectorAll('.userCheck').forEach(cb => cb.checked = this.checked)
-        }
-        // 批量删除
-        document.getElementById('batchDelUser').onclick = function () {
-            const checks = document.querySelectorAll('.userCheck:checked');
-            if (checks.length === 0) return showToast('请勾选要删除的数据');
-            const delIds = Array.from(checks).map(c => Number(c.dataset.id));
-            userList = userList.filter(u => !delIds.includes(u.id));
-            renderUserTable();
-            showToast('批量删除完成');
-        }
-        // 导出模拟
-        document.getElementById('exportUser').onclick = () => showToast('地点数据导出成功');
-
-        // 新增地点弹窗
-        const userModal = document.getElementById('userModal');
-        document.getElementById('addUserBtn').onclick = () => {
-            document.getElementById('userModalTitle').innerText = '新增地点';
-            document.getElementById('editUserId').value = '';
-            document.getElementById('uName').value = '';
-            document.getElementById('uPhone').value = '';
-            userModal.classList.add('show');
-        }
-        document.getElementById('closeUserModal').onclick = () => userModal.classList.remove('show');
-        document.getElementById('saveUser').onclick = function () {
-            const name = document.getElementById('uName').value.trim();
-            const spot = document.getElementById('uPhone').value.trim();
-            const editId = document.getElementById('editUserId').value;
-            if (!name || !spot) return showToast('请填写完整信息');
-            if (editId) {
-                const u = userList.find(x => x.id === Number(editId));
-                u.name = name; u.spot = spot;
-            } else {
-                userList.push({ id: userId++, name: name, spot: spot, time: new Date().toLocaleDateString(), status: true })
+                // 单行删除
+                document.querySelectorAll('.delUser').forEach(btn => {
+                    btn.onclick = function () {
+                        const delId = Number(this.dataset.id);
+                        userList = userList.filter(u => u.id !== delId);
+                        renderUserTable();
+                        showToast('删除成功');
+                    }
+                })
+                // 编辑地点
+                document.querySelectorAll('.editUser').forEach(btn => {
+                    btn.onclick = function () {
+                        const eid = Number(this.dataset.id);
+                        const user = userList.find(u => u.id === eid);
+                        document.getElementById('editUserId').value = eid;
+                        document.getElementById('userModalTitle').innerText = '编辑地点';
+                        document.getElementById('uName').value = user.name;
+                        document.getElementById('uPhone').value = user.spot;
+                        document.getElementById('userModal').classList.add('show');
+                    }
+                })
             }
-            userModal.classList.remove('show');
-            renderUserTable();
-            showToast('保存成功');
-        }
 
-        // 地点搜索
-        document.getElementById('userSearch').oninput = function () {
-            const key = this.value.toLowerCase();
-            const tbody = document.querySelector('#userTable tbody');
-            tbody.innerHTML = '';
-            const filter = userList.filter(u => u.name.includes(key) || u.spot.includes(key));
-            filter.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
+            // 全选
+            document.getElementById('userAllCheck').onchange = function () {
+                document.querySelectorAll('.userCheck').forEach(cb => cb.checked = this.checked)
+            }
+            // 批量删除
+            document.getElementById('batchDelUser').onclick = function () {
+                const checks = document.querySelectorAll('.userCheck:checked');
+                if (checks.length === 0) return showToast('请勾选要删除的数据');
+                const delIds = Array.from(checks).map(c => Number(c.dataset.id));
+                userList = userList.filter(u => !delIds.includes(u.id));
+                renderUserTable();
+                showToast('批量删除完成');
+            }
+            // 导出模拟
+            document.getElementById('exportUser').onclick = () => showToast('地点数据导出成功');
+
+            // 新增地点弹窗
+            const userModal = document.getElementById('userModal');
+            document.getElementById('addUserBtn').onclick = () => {
+                document.getElementById('userModalTitle').innerText = '新增地点';
+                document.getElementById('editUserId').value = '';
+                document.getElementById('uName').value = '';
+                document.getElementById('uPhone').value = '';
+                userModal.classList.add('show');
+            }
+            document.getElementById('closeUserModal').onclick = () => userModal.classList.remove('show');
+            document.getElementById('saveUser').onclick = function () {
+                const name = document.getElementById('uName').value.trim();
+                const spot = document.getElementById('uPhone').value.trim();
+                const editId = document.getElementById('editUserId').value;
+                if (!name || !spot) return showToast('请填写完整信息');
+                if (editId) {
+                    const u = userList.find(x => x.id === Number(editId));
+                    u.name = name; u.spot = spot;
+                } else {
+                    userList.push({ id: userId++, name: name, spot: spot, time: new Date().toLocaleDateString(), status: true })
+                }
+                userModal.classList.remove('show');
+                renderUserTable();
+                showToast('保存成功');
+            }
+
+            // 地点搜索
+            document.getElementById('userSearch').oninput = function () {
+                const key = this.value.toLowerCase();
+                const tbody = document.querySelector('#userTable tbody');
+                tbody.innerHTML = '';
+                const filter = userList.filter(u => u.name.includes(key) || u.spot.includes(key));
+                filter.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
           <td><input type="checkbox" class="userCheck" data-id="${item.id}"></td>
           <td>${item.id}</td>
           <td>${item.name}</td>
@@ -850,17 +855,17 @@
             <button class="btn btn-danger delUser" data-id="${item.id}">删除</button>
           </td>
         `
-                tbody.appendChild(tr);
-            })
-        }
+                    tbody.appendChild(tr);
+                })
+            }
 
-        // ========== 打卡模块 ==========
-        function renderTeacherTable() {
-            const tbody = document.querySelector('#teacherTable tbody');
-            tbody.innerHTML = '';
-            teacherList.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
+            // ========== 打卡模块 ==========
+            function renderTeacherTable() {
+                const tbody = document.querySelector('#teacherTable tbody');
+                tbody.innerHTML = '';
+                teacherList.forEach(item => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
           <td>${item.id}</td>
           <td>${item.name}</td>
           <td>${item.spot}</td>
@@ -872,96 +877,96 @@
             <button class="btn btn-danger delTeacher" data-id="${item.id}">删除</button>
           </td>
         `
-                tbody.appendChild(tr);
-            })
-            // 删除、编辑、状态切换
-            document.querySelectorAll('.delTeacher').forEach(btn => {
-                btn.onclick = function () {
-                    const delId = Number(this.dataset.id);
-                    teacherList = teacherList.filter(t => t.id !== delId);
-                    renderTeacherTable();
-                    showToast('删除成功');
-                }
-            })
-            document.querySelectorAll('.editTeacher').forEach(btn => {
-                btn.onclick = function () {
-                    const eid = Number(this.dataset.id);
-                    const t = teacherList.find(x => x.id === eid);
-                    document.getElementById('editTeacherId').value = eid;
-                    document.getElementById('teacherModalTitle').innerText = '编辑打卡';
-                    document.getElementById('tName').value = t.name;
-                    document.getElementById('tSubject').value = t.spot;
-                    document.getElementById('tYear').value = t.number;
-                    document.getElementById('tPhone').value = t.comment;
-                    document.getElementById('teacherModal').classList.add('show');
-                }
-            })
-            document.querySelectorAll('#teacherTable .switch').forEach(sw => {
-                sw.onclick = function () {
-                    const tid = Number(this.dataset.id);
-                    const t = teacherList.find(x => x.id === tid);
-                    t.status = !t.status;
-                    this.classList.toggle('on');
-                    showToast('开放状态已修改');
-                }
-            })
-        }
-
-        const teacherModal = document.getElementById('teacherModal');
-        document.getElementById('addTeacherBtn').onclick = () => {
-            document.getElementById('teacherModalTitle').innerText = '新增打卡';
-            document.getElementById('editTeacherId').value = '';
-            document.getElementById('tName').value = '';
-            document.getElementById('tSubject').value = '';
-            document.getElementById('tYear').value = '';
-            document.getElementById('tPhone').value = '';
-            teacherModal.classList.add('show');
-        }
-        document.getElementById('closeTeacherModal').onclick = () => teacherModal.classList.remove('show');
-        document.getElementById('saveTeacher').onclick = function () {
-            const name = document.getElementById('tName').value.trim();
-            const spot = document.getElementById('tSubject').value.trim();
-            const number = document.getElementById('tYear').value.trim();
-            const comment = document.getElementById('tPhone').value.trim();
-            const editId = document.getElementById('editTeacherId').value;
-            if (!name || !spot || !number || !comment) return showToast('请填写完整打卡信息');
-            if (editId) {
-                const t = teacherList.find(x => x.id === Number(editId));
-                t.name = name; t.spot = spot; t.number = number; t.comment = comment;
-            } else {
-                teacherList.push({ id: teacherId++, name: name, spot: spot, number: number, comment: comment, status: true })
+                    tbody.appendChild(tr);
+                })
+                // 删除、编辑、状态切换
+                document.querySelectorAll('.delTeacher').forEach(btn => {
+                    btn.onclick = function () {
+                        const delId = Number(this.dataset.id);
+                        teacherList = teacherList.filter(t => t.id !== delId);
+                        renderTeacherTable();
+                        showToast('删除成功');
+                    }
+                })
+                document.querySelectorAll('.editTeacher').forEach(btn => {
+                    btn.onclick = function () {
+                        const eid = Number(this.dataset.id);
+                        const t = teacherList.find(x => x.id === eid);
+                        document.getElementById('editTeacherId').value = eid;
+                        document.getElementById('teacherModalTitle').innerText = '编辑打卡';
+                        document.getElementById('tName').value = t.name;
+                        document.getElementById('tSubject').value = t.spot;
+                        document.getElementById('tYear').value = t.number;
+                        document.getElementById('tPhone').value = t.comment;
+                        document.getElementById('teacherModal').classList.add('show');
+                    }
+                })
+                document.querySelectorAll('#teacherTable .switch').forEach(sw => {
+                    sw.onclick = function () {
+                        const tid = Number(this.dataset.id);
+                        const t = teacherList.find(x => x.id === tid);
+                        t.status = !t.status;
+                        this.classList.toggle('on');
+                        showToast('开放状态已修改');
+                    }
+                })
             }
-            teacherModal.classList.remove('show');
-            renderTeacherTable();
-            showToast('打卡信息保存成功');
-        }
 
-        // ========== 用户调研提交 ==========
-        document.getElementById('submitSurveyBtn').onclick = function () {
-            const q1 = document.querySelector('input[name="q1"]:checked');
-            if (!q1) return showToast('请回答第1题');
-            const q2 = document.querySelectorAll('input[name="q2"]:checked');
-            if (q2.length === 0) return showToast('请回答第2题，至少选一个景点');
-            const q3 = document.querySelector('#courseList select').value;
-            if (!q3) return showToast('请回答第3题');
-            const q4 = document.querySelector('input[name="q4"]:checked');
-            if (!q4) return showToast('请回答第4题');
-            showToast('调研提交成功，感谢您的参与！');
-            // 重置表单
-            document.querySelectorAll('#courseList input[type="radio"]').forEach(r => r.checked = false);
-            document.querySelectorAll('#courseList input[type="checkbox"]').forEach(c => c.checked = false);
-            document.querySelector('#courseList select').selectedIndex = 0;
-            document.querySelector('#courseList textarea').value = '';
-        }
+            const teacherModal = document.getElementById('teacherModal');
+            document.getElementById('addTeacherBtn').onclick = () => {
+                document.getElementById('teacherModalTitle').innerText = '新增打卡';
+                document.getElementById('editTeacherId').value = '';
+                document.getElementById('tName').value = '';
+                document.getElementById('tSubject').value = '';
+                document.getElementById('tYear').value = '';
+                document.getElementById('tPhone').value = '';
+                teacherModal.classList.add('show');
+            }
+            document.getElementById('closeTeacherModal').onclick = () => teacherModal.classList.remove('show');
+            document.getElementById('saveTeacher').onclick = function () {
+                const name = document.getElementById('tName').value.trim();
+                const spot = document.getElementById('tSubject').value.trim();
+                const number = document.getElementById('tYear').value.trim();
+                const comment = document.getElementById('tPhone').value.trim();
+                const editId = document.getElementById('editTeacherId').value;
+                if (!name || !spot || !number || !comment) return showToast('请填写完整打卡信息');
+                if (editId) {
+                    const t = teacherList.find(x => x.id === Number(editId));
+                    t.name = name; t.spot = spot; t.number = number; t.comment = comment;
+                } else {
+                    teacherList.push({ id: teacherId++, name: name, spot: spot, number: number, comment: comment, status: true })
+                }
+                teacherModal.classList.remove('show');
+                renderTeacherTable();
+                showToast('打卡信息保存成功');
+            }
 
-        // 系统设置保存
-        document.getElementById('saveSysBtn').onclick = () => showToast('系统配置保存完成');
-        // 自动刷新开关
-        document.getElementById('refreshSwitch').onclick = function () {
-            this.classList.toggle('on');
-            showToast('自动刷新设置已切换');
-        }
-    </script>
-</body>
+            // ========== 用户调研提交 ==========
+            document.getElementById('submitSurveyBtn').onclick = function () {
+                const q1 = document.querySelector('input[name="q1"]:checked');
+                if (!q1) return showToast('请回答第1题');
+                const q2 = document.querySelectorAll('input[name="q2"]:checked');
+                if (q2.length === 0) return showToast('请回答第2题，至少选一个景点');
+                const q3 = document.querySelector('#courseList select').value;
+                if (!q3) return showToast('请回答第3题');
+                const q4 = document.querySelector('input[name="q4"]:checked');
+                if (!q4) return showToast('请回答第4题');
+                showToast('调研提交成功，感谢您的参与！');
+                // 重置表单
+                document.querySelectorAll('#courseList input[type="radio"]').forEach(r => r.checked = false);
+                document.querySelectorAll('#courseList input[type="checkbox"]').forEach(c => c.checked = false);
+                document.querySelector('#courseList select').selectedIndex = 0;
+                document.querySelector('#courseList textarea').value = '';
+            }
+
+            // 系统设置保存
+            document.getElementById('saveSysBtn').onclick = () => showToast('系统配置保存完成');
+            // 自动刷新开关
+            document.getElementById('refreshSwitch').onclick = function () {
+                this.classList.toggle('on');
+                showToast('自动刷新设置已切换');
+            }
+        </script>
+    </body>
 
 </html>

@@ -7,7 +7,7 @@
 /* 布局 */
 
 .wrap {
-    width: 80%;
+    width: 95%;
     margin: 50px auto;
     display: flex;
     flex-direction: column;
@@ -100,8 +100,8 @@
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     margin: 35px auto;
-    max-width: 1400px;
-    height: 180px;
+    max-width: 1500px;
+    height: auto;
     overflow: hidden;
     font-family: "Microsoft YaHei", sans-serif;
 }
@@ -126,158 +126,6 @@
 .tab-item:hover {
     color: #ff6b00;
     background-color: rgba(255, 107, 0, 0.05);
-}
-
-.tab-item.active {
-    /* 激活状态 */
-    color: #ff6b00;
-    font-weight: bold;
-    background-color: #fff;
-}
-
-.tab-item.active::after {
-    /* 激活状态下方的指示条 */
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 3px;
-    background-color: #ff6b00;
-    border-radius: 2px 2px 0 0;
-}
-
-.tab-content {
-    padding: 35px;
-    min-height: 120px;
-}
-
-.tab-content>div {
-    /* 隐藏非激活的 tab 内容 */
-    display: none;
-}
-
-.tab-content>div.show {
-    display: block;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.searchPanel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.searchPanel input[type="text"] {
-    height: 55px;
-    padding: 0 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 0.3s;
-    font-size: 14px;
-    color: #333;
-}
-
-.searchPanel input[type="text"]:focus {
-    border-color: #ff6b00;
-    box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.1);
-}
-
-.searchPanel[data-type="all"] input[type="text"] {
-    /* 针对不同面板的输入框宽度调整 */
-    width: 550px;
-}
-
-.searchPanel[data-type="hotel"] input[type="text"] {
-    width: 200px;
-}
-
-
-.date-input {
-    /* 酒店日期选择区域 */
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.date-input input[type="text"] {
-    width: 180px !important;
-    /* 强制覆盖上面的宽度 */
-}
-
-.date-input input[type="date"] {
-    height: 40px;
-    padding: 0 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    outline: none;
-    color: #666;
-    cursor: pointer;
-}
-
-.date-input input[type="date"]:focus {
-    border-color: #ff6b00;
-}
-
-.searchBtn {
-    height: 53px;
-    padding: 0 30px;
-    background-color: #ff6b00;
-    /* 主题色 */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    letter-spacing: 2px;
-}
-
-.searchBtn:hover {
-    background-color: #e55a00;
-    /* 深一点的橙色 */
-}
-
-
-@media (max-width: 768px) {
-
-    /* 响应式适配 */
-    .searchPanel {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .searchPanel input[type="text"],
-    .date-input,
-    .date-input input[type="text"],
-    .date-input input[type="date"] {
-        width: 100% !important;
-        box-sizing: border-box;
-    }
-
-    .date-input {
-        flex-direction: column;
-    }
-
-    .searchBtn {
-        width: 100%;
-    }
 }
 
 /* 搜索栏 */
@@ -858,3 +706,8 @@ footer {
 }
 
 /* 尾部 */
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
