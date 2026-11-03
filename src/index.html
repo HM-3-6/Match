@@ -48,8 +48,10 @@
         <div class="top">
             <h2>&nbsp;&nbsp;精选旅游路线<span class="eng"> &nbsp;</span></h2>
             <div class="topContent">
-                <!--两条路线推荐-->
-                <!--嵌入地图-->
+                <div class="route-list">
+                    <!-- 卡片由 components/Javascript/routeList.js 用字符串拼接-->
+
+                </div>
 
             </div>
         </div>
@@ -287,6 +289,27 @@
             });
         });
     </script>
+    <script>
+        /* 精选路线「查看详情」轻提示 */
+        function showToast(message) {
+            let toast = document.getElementById('routeToast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'routeToast';
+                toast.className = 'toast';
+                document.body.appendChild(toast);
+            }
+            toast.textContent = message;
+            void toast.offsetWidth;
+            toast.classList.add('show');
+            clearTimeout(showToast.timer);
+            showToast.timer = setTimeout(function () {
+                toast.classList.remove('show');
+            }, 1800);
+        }
+    </script>
+    <!-- 精选旅游路线-->
+    <script src="./components/Javascript/routeList.js"></script>
 </body>
 
 </html>
