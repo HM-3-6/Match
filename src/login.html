@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>红色旅游 · 登录</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #fdf2f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .login-box {
+      max-width: 420px;
+      width: 100%;
+      background: #fff;
+      border-radius: 1.5rem;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 20px 40px -12px rgba(139, 0, 0, 0.25);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header .stars {
+      color: #c62828;
+      font-size: 1.2rem;
+      letter-spacing: 0.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .header h1 {
+      font-size: 1.6rem;
+      color: #8b0000;
+      margin-bottom: 0.4rem;
+    }
+
+    .header p {
+      font-size: 0.9rem;
+      color: #a56a6a;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #4a1c1c;
+      margin-bottom: 0.4rem;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap i {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b76e6e;
+      font-size: 1rem;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      padding: 0.85rem 2.6rem 0.85rem 2.6rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      border: 1.5px solid #f0d9d9;
+      border-radius: 10px;
+      background: #fdf9f9;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .input-wrap input:focus {
+      border-color: #c62828;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.12);
+    }
+
+    .input-wrap input::placeholder {
+      color: #b99a9a;
+    }
+
+    .toggle-pwd {
+      position: absolute;
+      right: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #b76e6e;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.2rem;
+    }
+
+    .toggle-pwd:hover {
+      color: #c62828;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .options label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #5a3333;
+      cursor: pointer;
+    }
+
+    .options input[type="checkbox"] {
+      accent-color: #c62828;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .options a {
+      color: #b71c1c;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .options a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 0.95rem;
+      background: linear-gradient(145deg, #c62828, #a01818);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px -4px rgba(198, 40, 40, 0.45);
+      transition: all 0.2s;
+    }
+
+    .btn-login:hover {
+      background: linear-gradient(145deg, #b71c1c, #8b0000);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px -4px rgba(198, 40, 40, 0.55);
+    }
+
+    .btn-login:active {
+      transform: translateY(1px);
+    }
+
+    .signup {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #7a5555;
+    }
+
+    .signup a {
+      color: #b71c1c;
+      font-weight: 600;
+      text-decoration: none;
+      margin-left: 0.2rem;
+    }
+
+    .signup a:hover {
+      text-decoration: underline;
+    }
+
+    /* 注册成功提示条*/
+    .success-tip {
+      background: #fdeaea;
+      color: #b71c1c;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-left: 3px solid #c62828;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-box">
+    <!-- 注册成功提示条 -->
+    <div id="successTip" class="success-tip" style="display: none;">
+      <i class="fas fa-check-circle"></i> 注册成功！请登录您的账户
+    </div>
+
+    <div class="header">
+      <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+      <h1>红色旅游</h1>
+      <p>追寻红色足迹 · 传承革命精神</p>
+    </div>
+
+    <form id="loginForm" action="#" method="POST">
+      <div class="form-group">
+        <label for="account">邮箱 / 手机号</label>
+        <div class="input-wrap">
+          <i class="fas fa-user"></i>
+          <input type="text" id="account" name="account" placeholder="请输入邮箱或手机号" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">登录密码</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock"></i>
+          <input type="password" id="password" name="password" placeholder="请输入密码" required>
+          <button type="button" class="toggle-pwd" id="togglePwd"><i class="far fa-eye" id="eyeIcon"></i></button>
+        </div>
+      </div>
+
+      <div class="options">
+        <label><input type="checkbox" name="remember" checked> 记住我</label>
+        <a href="#">忘记密码？</a>
+      </div>
+
+      <button type="submit" class="btn-login">登 录</button>
+
+      <div class="signup">
+        还没有账户？<a href="register.html">立即注册</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    /* ========== 1. 密码可见切换 ========== */
+    const pwd = document.getElementById('password');
+    const toggle = document.getElementById('togglePwd');
+    const eye = document.getElementById('eyeIcon');
+    toggle.addEventListener('click', () => {
+      const isPwd = pwd.type === 'password';
+      pwd.type = isPwd ? 'text' : 'password';
+      eye.className = isPwd ? 'far fa-eye-slash' : 'far fa-eye';
+    });
+
+    /* ========== 2. 读取 URL 参数，判断是否从注册页跳来 ========== */
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('from') === 'register') {
+      const tip = document.getElementById('successTip');
+      tip.style.display = 'block';
+      // 3 秒后自动淡出隐藏
+      setTimeout(() => { tip.style.display = 'none'; }, 5000);
+    }
+
+    /* ========== 3. 登录提交（模拟跳转首页） ========== */
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const account = document.getElementById('account').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!account || !password) {
+        alert('请填写完整登录信息');
+        return;
+      }
+
+      const btn = document.querySelector('.btn-login');
+      btn.disabled = true;
+      btn.textContent = '登录中...';
+
+      setTimeout(() => {
+        alert('登录成功！');
+
+        window.location.href = 'index.html';
+      }, 800);
+    });
+  </script>
+</body>
+
+</html>

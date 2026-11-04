@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>南昌起义 · 红色故事简介</title>
+        <style>
+            /* 全局重置与庄重风格 */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Segoe UI', 'Roboto', 'Noto Sans', 'Helvetica Neue', sans-serif;
+                background-color: #f5efe9;
+                /* 暖白底色，带一点历史感 */
+                color: #2c2c2c;
+                line-height: 1.7;
+                padding: 2rem 1rem;
+            }
+
+            /* 主容器，经典红色边框与阴影 */
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+                background: #fffcf8;
+                border: 2px solid #b13e3e;
+                border-radius: 18px;
+                box-shadow: 0 12px 28px rgba(150, 0, 0, 0.15);
+                padding: 2.5rem 2rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* 左上角装饰：红色五角星 + 旗穗意象 */
+            .container::before {
+                content: "★";
+                position: absolute;
+                top: 10px;
+                left: 22px;
+                font-size: 2rem;
+                color: #b13e3e;
+                opacity: 0.3;
+                transform: rotate(-10deg);
+            }
+
+            .container::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 150px;
+                height: 150px;
+                background: radial-gradient(circle, rgba(200, 60, 60, 0.05) 0%, transparent 70%);
+                pointer-events: none;
+            }
+
+            /* 标题区域 */
+            .header {
+                text-align: center;
+                margin-bottom: 2.5rem;
+                border-bottom: 3px solid #b13e3e;
+                padding-bottom: 1.5rem;
+                position: relative;
+            }
+
+            .header h1 {
+                font-size: 2.8rem;
+                color: #8b1e1e;
+                letter-spacing: 3px;
+                font-weight: 700;
+                text-shadow: 1px 1px 0 #e0c9b0;
+                margin-bottom: 0.5rem;
+                word-break: break-word;
+            }
+
+            .header .subhead {
+                font-size: 1.2rem;
+                color: #5e3a3a;
+                font-style: italic;
+                font-weight: 400;
+                letter-spacing: 1px;
+            }
+
+            /* 红旗飘带装饰（纯CSS） */
+            .ribbon {
+                display: flex;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 12px;
+            }
+
+            .ribbon span {
+                display: inline-block;
+                width: 40px;
+                height: 6px;
+                background: #b13e3e;
+                border-radius: 3px;
+            }
+
+            .ribbon span:nth-child(2) {
+                width: 60px;
+                background: #c93a3a;
+            }
+
+            .ribbon span:nth-child(3) {
+                width: 30px;
+                background: #a52a2a;
+            }
+
+            /* 引言/摘要卡片 */
+            .intro-card {
+                background: #fef4e9;
+                border-left: 10px solid #b13e3e;
+                padding: 1.8rem 2rem;
+                border-radius: 0 30px 30px 0;
+                margin-bottom: 2.5rem;
+                box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
+            }
+
+            .intro-card p {
+                font-size: 1.2rem;
+                font-weight: 500;
+                color: #2e1e1e;
+                margin-bottom: 0.8rem;
+                display: flex;
+                align-items: flex-start;
+                /* 适配图标与文字对齐 */
+                gap: 10px;
+            }
+
+            .intro-card p:last-child {
+                margin-bottom: 0;
+                font-weight: 400;
+                font-size: 1.08rem;
+                color: #3f2c2c;
+                display: block;
+                /* 第二段不需要图标对齐 */
+            }
+
+            /* 纯CSS红色五角星图标 */
+            .css-star {
+                color: #b13e3e;
+                font-size: 1.2rem;
+                line-height: 1.2;
+                text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+                flex-shrink: 0;
+            }
+
+            /* 核心信息网格：时间地点、关键人物 */
+            .info-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.8rem;
+                margin: 2.5rem 0 2rem;
+            }
+
+            .info-box {
+                background: #ffffff;
+                border-radius: 24px;
+                padding: 1.6rem 1.8rem;
+                box-shadow: 0 6px 18px rgba(170, 70, 70, 0.08);
+                border: 1px solid #f0dbd0;
+                transition: transform 0.2s ease;
+            }
+
+            .info-box:hover {
+                transform: translateY(-3px);
+            }
+
+            .info-box h3 {
+                font-size: 1.5rem;
+                color: #8b1e1e;
+                border-left: 6px solid #b13e3e;
+                padding-left: 14px;
+                margin-bottom: 1.2rem;
+                font-weight: 600;
+            }
+
+            .info-box ul {
+                list-style: none;
+            }
+
+            .info-box li {
+                margin-bottom: 0.8rem;
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                font-size: 1.05rem;
+            }
+
+            .info-box li strong {
+                min-width: 90px;
+                color: #7a2e2e;
+                font-weight: 600;
+            }
+
+            .info-box li span {
+                color: #2f2f2f;
+            }
+
+            /* 人物标签 */
+            .person-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                margin-top: 10px;
+            }
+
+            .person-tag {
+                background: #f0e2d6;
+                color: #7a2e2e;
+                padding: 6px 18px;
+                border-radius: 40px;
+                font-weight: 500;
+                font-size: 0.98rem;
+                border: 1px solid #dbb5a5;
+                transition: all 0.2s;
+            }
+
+            .person-tag:hover {
+                background: #b13e3e;
+                color: #fff8f0;
+                border-color: #b13e3e;
+                cursor: default;
+            }
+
+            /* 故事叙述部分 */
+            .story-section {
+                margin: 3rem 0 2rem;
+            }
+
+            .story-section h2 {
+                font-size: 2rem;
+                color: #8b1e1e;
+                margin-bottom: 1.5rem;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-weight: 650;
+            }
+
+            .story-section h2::before {
+                content: "⚡";
+                font-size: 2.2rem;
+                color: #b13e3e;
+                filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+            }
+
+            .story-block {
+                background: #fffaf5;
+                border-radius: 24px;
+                padding: 1.8rem 2rem;
+                margin-bottom: 1.8rem;
+                border: 1px solid #ebd9ce;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            }
+
+            .story-block p {
+                margin-bottom: 1rem;
+                font-size: 1.08rem;
+                color: #2a1f1f;
+                text-align: justify;
+            }
+
+            .story-block p:last-child {
+                margin-bottom: 0;
+            }
+
+            .story-block strong {
+                color: #9e2b2b;
+            }
+
+            /* 关键引语 / 口号 */
+            .slogan {
+                background: #b13e3e;
+                color: #fff5e6;
+                font-size: 1.6rem;
+                font-weight: 700;
+                text-align: center;
+                padding: 1.4rem 1.8rem;
+                border-radius: 60px;
+                margin: 2.5rem 0 1.8rem;
+                letter-spacing: 2px;
+                box-shadow: 0 8px 16px rgba(170, 40, 40, 0.3);
+                font-style: italic;
+                word-break: break-word;
+            }
+
+            /* 时间线简表 */
+            .timeline {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin-top: 2.5rem;
+                gap: 12px;
+            }
+
+            .timeline-item {
+                flex: 1 1 180px;
+                background: #f9ede4;
+                padding: 1.2rem 1rem;
+                border-radius: 30px;
+                text-align: center;
+                border-bottom: 5px solid #b13e3e;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            .timeline-item .date {
+                font-weight: 800;
+                font-size: 1.3rem;
+                color: #8b1e1e;
+                display: block;
+                margin-bottom: 6px;
+            }
+
+            .timeline-item .desc {
+                font-size: 0.98rem;
+                color: #3d2b2b;
+            }
+
+            /* 页脚 */
+            .footer {
+                margin-top: 2.8rem;
+                padding-top: 1.5rem;
+                text-align: center;
+                border-top: 2px dashed #d4b9aa;
+                font-size: 0.95rem;
+                color: #7a5a4a;
+                font-style: italic;
+            }
+
+            /* 响应式设计 */
+            @media (max-width: 700px) {
+                .container {
+                    padding: 1.8rem 1.2rem;
+                }
+
+                .header h1 {
+                    font-size: 2rem;
+                    letter-spacing: 2px;
+                }
+
+                .header .subhead {
+                    font-size: 1rem;
+                }
+
+                .info-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1.2rem;
+                }
+
+                .intro-card p {
+                    font-size: 1rem;
+                }
+
+                .slogan {
+                    font-size: 1.3rem;
+                    padding: 1rem 1rem;
+                }
+
+                .timeline-item {
+                    flex: 1 1 100%;
+                }
+
+                .story-section h2 {
+                    font-size: 1.7rem;
+                }
+            }
+
+            @media (max-width: 400px) {
+                .header h1 {
+                    font-size: 1.6rem;
+                }
+
+                .info-box h3 {
+                    font-size: 1.3rem;
+                }
+
+                .person-tag {
+                    padding: 4px 12px;
+                    font-size: 0.85rem;
+                }
+
+                .slogan {
+                    font-size: 1.1rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- 标题区 -->
+            <div class="header">
+                <h1>南昌起义</h1>
+                <div class="subhead">1927.8.1 · 石破天惊第一枪</div>
+                <div class="ribbon">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <!-- 引言卡片：修改了国旗Emoji，用纯CSS红星替代 -->
+            <div class="intro-card">
+                <p><span class="css-star">★</span> 南昌起义是中国共产党独立领导武装斗争、创建革命军队的开始。</p>
+                <p>1927年8月1日凌晨，江西南昌响起划时代的枪声，打响了武装反抗国民党反动派的第一枪。从此，8月1日成为中国人民解放军建军节。这场起义如星火般点燃了全国革命的希望，无数仁人志士用热血铸就了“八一”军魂。
+                </p>
+            </div>
+
+            <!-- 核心信息网格：时间地点 + 关键人物 -->
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>⏳ 时间 · 地点</h3>
+                    <ul>
+                        <li><strong>时间</strong><span>1927年8月1日凌晨2时</span></li>
+                        <li><strong>地点</strong><span>江西省南昌市</span></li>
+                        <li><strong>起义总指挥部</strong><span>江西大旅社（今南昌八一起义纪念馆）</span></li>
+                        <li><strong>背景</strong><span>大革命失败后，中共中央决定在南昌发动武装起义</span></li>
+                    </ul>
+                </div>
+                <div class="info-box">
+                    <h3>👥 关键人物</h3>
+                    <div class="person-tags">
+                        <span class="person-tag">周恩来</span>
+                        <span class="person-tag">贺龙</span>
+                        <span class="person-tag">叶挺</span>
+                        <span class="person-tag">朱德</span>
+                        <span class="person-tag">刘伯承</span>
+                        <span class="person-tag">恽代英</span>
+                        <span class="person-tag">谭平山</span>
+                    </div>
+                    <p style="margin-top: 1.2rem; font-size: 0.98rem; color: #5a3e3e;">以周恩来为书记的前敌委员会，成为起义的领导核心。</p>
+                </div>
+            </div>
+
+            <!-- 故事叙述部分 -->
+            <div class="story-section">
+                <h2>红色故事 · 惊雷第一枪</h2>
+
+                <div class="story-block">
+                    <p><strong>1927年，风云突变。</strong>
+                        蒋介石、汪精卫相继背叛革命，大革命陷入白色恐怖。为了挽救革命，中共中央决定在南昌举行武装起义。7月27日，周恩来抵达南昌，在江西大旅社成立前敌委员会，紧锣密鼓地筹划起义。</p>
+                    <p>当时南昌城内，贺龙率领的国民革命军第二十军、叶挺率领的第十一军第二十四师，以及朱德领导的第三军军官教育团等，共计两万余人，在党的掌握之下。起义时间原定于8月1日凌晨4点，但因叛徒告密，前敌委员会当机立断，提前两小时行动。
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <p><strong>8月1日凌晨2时，</strong>
+                        南昌城头一声枪响，划破了沉沉的夜幕。起义军以红领巾、白毛巾为标识，在周恩来、贺龙、叶挺、朱德、刘伯承的指挥下，向驻守南昌的国民党军队发起猛烈进攻。经过四个多小时的激战，起义军占领南昌全城，歼灭守敌三千余人，缴获枪支五千余支。
+                    </p>
+                    <p>拂晓时分，南昌城头飘起了革命的红旗。起义成功后，在江西大旅社召开联席会议，成立了以共产党人为核心的中国国民党革命委员会，并通过了《中央委员宣言》。南昌起义的胜利，使中国人民在黑暗中看到了高举革命的旗帜。
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <p><strong>起义军南下与井冈山会师。</strong>
+                        南昌起义后，汪精卫急令张发奎、朱培德等部向南昌反扑。起义军按原计划南下广东，以期恢复广东革命根据地。但在潮汕地区遭遇强敌围攻，部分起义军由朱德、陈毅率领转战湘赣边界，最终于1928年4月与毛泽东领导的秋收起义部队在井冈山胜利会师，成为中国革命的重要武装力量。
+                    </p>
+                    <p>南昌起义虽然最终未能直接在南昌立足，但它保存下来的革命火种，成为创建人民军队的基石。正如朱德所说：“南昌起义的枪声，宣告了中国共产党独立领导革命武装斗争的开始。”</p>
+                </div>
+            </div>
+
+            <!-- 口号 / 标语 -->
+            <div class="slogan">
+                “ 南昌起义，军旗升起的地方！ ”
+            </div>
+
+            <!-- 时间线简表 -->
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="date">7月27日</span>
+                    <span class="desc">前敌委员会成立，周恩来任书记</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="date">7月31日</span>
+                    <span class="desc">起义部队下达作战命令，提前行动</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="date">8月1日 2时</span>
+                    <span class="desc">南昌起义爆发，激战至拂晓</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="date">8月1日 9时</span>
+                    <span class="desc">起义成功，南昌解放</span>
+                </div>
+                <div class="timeline-item">
+                    <span class="date">1928年4月</span>
+                    <span class="desc">朱毛井冈山会师，壮大革命武装</span>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <div class="footer">
+                <p>⭐ 南昌起义精神永存 · 铭记历史 砥砺前行 ⭐</p>
+                <p style="margin-top: 8px; opacity: 0.8; font-size: 0.9rem;">—— 红色故事 · 八一起义纪念馆 致敬 ——</p>
+            </div>
+        </div>
+    </body>
+
+</html>
