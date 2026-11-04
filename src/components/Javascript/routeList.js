@@ -1,8 +1,3 @@
-/**
- * 精选旅游路线
- * 卡片的 HTML 不再写死在 index.html 里，统一由下面的数据 + 字符串拼接生成。
- * 以后增删路线只改 ROUTE_DATA，页面结构不用动。
- */
 const ROUTE_DATA = [
   {
     badge: "革命摇篮",

@@ -25,11 +25,7 @@
                 <div class="top">
                     <h2>&nbsp;&nbsp;精选旅游路线<span class="eng"> &nbsp;</span></h2>
                     <div class="topContent">
-                        <div class="route-list">
-                            <!-- 卡片由 components/Javascript/routeList.js 用字符串拼接-->
-
-                        </div>
-
+                        <div class="route-list"></div>
                     </div>
                 </div>
                 <div class="bottomBox">
@@ -81,44 +77,10 @@
             <p>&copy;&nbsp;&nbsp;行·迹 一站式文化旅游资讯平台</p>
         </footer>
 
-        <script>
-            const boxes = document.querySelectorAll('.slider-box');
-
-            boxes.forEach((box) => {
-                const slider = box.querySelector('.slider-input');
-
-                // 初始化一次，保证初始分割位置正确
-                box.style.setProperty('--percent', slider.value + '%');
-
-                // 监听拖动
-                slider.addEventListener('input', (e) => {
-                    box.style.setProperty('--percent', e.target.value + '%');
-                });
-            });
-        </script>
-        <script>
-            /* 精选路线「查看详情」轻提示 */
-            function showToast(message) {
-                let toast = document.getElementById('routeToast');
-                if (!toast) {
-                    toast = document.createElement('div');
-                    toast.id = 'routeToast';
-                    toast.className = 'toast';
-                    document.body.appendChild(toast);
-                }
-                toast.textContent = message;
-                void toast.offsetWidth;
-                toast.classList.add('show');
-                clearTimeout(showToast.timer);
-                showToast.timer = setTimeout(function () {
-                    toast.classList.remove('show');
-                }, 1800);
-            }
-        </script>
         <!-- 精选旅游路线-->
-        <script src="./components/Javascript/routeList.js"></script>
-        <script src="./components/Javascript/message.js"></script>
+        <script src="./components/Javascript/routeList.js?v=1.0" defer></script>
         <script src="./components/Javascript/splicing.js?v=1.0" defer></script>
+        <script src="./components/Javascript/.js?v=1.0" defer></script>
     </body>
 
 </html>
