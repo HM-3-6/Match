@@ -10,6 +10,7 @@ const ROUTE_DATA = [
     stay: "天2晚",
     audience: "党支部 / 研学团体",
     short: "井冈山",
+    map: "./jingGangShanDemo.html",
   },
   {
     badge: "革命圣地",
@@ -21,6 +22,7 @@ const ROUTE_DATA = [
     stay: "天3晚",
     audience: "党员干部 / 培训学员",
     short: "延安",
+    map: "./yanAnDemo.html",
   },
   {
     badge: "伟大转折",
@@ -32,6 +34,7 @@ const ROUTE_DATA = [
     stay: "天1晚",
     audience: "周末短途 / 家庭研学",
     short: "遵义",
+    map: "./zuiYiDemo.html",
   },
   {
     badge: "赶考出发",
@@ -43,6 +46,7 @@ const ROUTE_DATA = [
     stay: "天1晚",
     audience: "京津冀周边 / 团建",
     short: "西柏坡",
+    map: "./xiBanPoDemo.html",
   },
 ];
 
@@ -60,6 +64,10 @@ const buildRouteItem = (route) => {
     })
     .join("");
 
+  const action = route.map
+    ? `<a class="route-btn" href="${route.map}" target="_blank" rel="noopener">查看详情</a>`
+    : `<button class="route-btn" type="button" data-short="${route.short}">查看详情</button>`;
+
   return `<div class="route-item">
         <div class="route-info">
           <span class="route-badge">${route.badge}</span>
@@ -76,7 +84,7 @@ const buildRouteItem = (route) => {
             <div class="route-days">${route.days}<span>${route.stay}</span></div>
             <div class="route-audience">适合：${route.audience}</div>
           </div>
-          <button class="route-btn" type="button" data-short="${route.short}">查看详情</button>
+          ${action}
         </div>
       </div>`;
 };
@@ -91,7 +99,7 @@ const renderRouteList = () => {
   // 事件委托：不用给每个按钮单独绑事件
   list.addEventListener("click", (event) => {
     const btn = event.target.closest(".route-btn");
-    if (!btn) return;
+    if (!btn || btn.tagName === "A") return;
     if (typeof window.showToast === "function") {
       window.showToast(`查看${btn.dataset.short}路线详情`);
     }
