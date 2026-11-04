@@ -1,0 +1,74 @@
+.radio-carousel {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+/* 隐藏单选框 */
+.radio-carousel input {
+    display: none;
+}
+
+.radio-slides {
+    display: flex;
+    transition: transform 0.5s ease;
+    /* 滑动过渡效果 */
+    width: 100%;
+}
+
+.radio-slide {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.radio-slide img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+/* 核心逻辑：根据选中的不同 radio，平移图片 */
+#slide1:checked~.radio-slides {
+    transform: translateX(0%);
+}
+
+#slide2:checked~.radio-slides {
+    transform: translateX(-100%);
+}
+
+#slide3:checked~.radio-slides {
+    transform: translateX(-200%);
+}
+
+/* 底部导航点样式 */
+.radio-nav {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.radio-nav label {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+/* 选中状态的点变红变长 */
+#slide1:checked~.radio-nav label:nth-child(1),
+#slide2:checked~.radio-nav label:nth-child(2),
+#slide3:checked~.radio-nav label:nth-child(3) {
+    background-color: #d32f2f;
+    width: 20px;
+    border-radius: 4px;
+}
