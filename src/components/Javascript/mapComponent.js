@@ -95,7 +95,6 @@
     document.getElementById('lockBoundsBtn').onclick = lockBounds;
     document.getElementById('unlockBoundsBtn').onclick = unlockBounds;
     /* ---------- 长征路线（简化示意） ---------- */
-    // 节点按时间顺序排列；坐标为示意位置，非精确行军路线
     var ROUTE = [
       { lnglat: [115.4114, 25.9521], date: '1934.10', name: '于都出发', flagOffset: [-26, -28] },
       { lnglat: [110.6620, 25.6010], date: '1934.11', name: '湘江战役', offset: [6, 30] },
