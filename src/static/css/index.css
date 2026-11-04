@@ -16,10 +16,11 @@
 
 .top {
     width: 100%;
-    height: 252px;
+    height: auto;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px 22px 24px;
 }
 
 .bottomBox {
@@ -128,13 +129,165 @@
     background-color: rgba(255, 107, 0, 0.05);
 }
 
+<<<<<<< HEAD
+=======
+.tab-item.active {
+    color: #ff6b00;
+    font-weight: bold;
+    background-color: #fff;
+}
+
+.tab-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background-color: #ff6b00;
+    border-radius: 2px 2px 0 0;
+}
+
+.tab-content {
+    padding: 35px;
+    min-height: 120px;
+}
+
+.tab-content>div {
+
+    display: none;
+}
+
+.tab-content>div.show {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.searchPanel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.searchPanel input[type="text"] {
+    height: 55px;
+    padding: 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-size: 14px;
+    color: #333;
+}
+
+.searchPanel input[type="text"]:focus {
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.1);
+}
+
+.searchPanel[data-type="all"] input[type="text"] {
+    width: 550px;
+}
+
+.searchPanel[data-type="hotel"] input[type="text"] {
+    width: 200px;
+}
+
+
+.date-input {
+    /* 酒店日期选择区域 */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date-input input[type="text"] {
+    width: 180px !important;
+    /* 强制覆盖上面的宽度 */
+}
+
+.date-input input[type="date"] {
+    height: 40px;
+    padding: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    color: #666;
+    cursor: pointer;
+}
+
+.date-input input[type="date"]:focus {
+    border-color: #ff6b00;
+}
+
+.searchBtn {
+    height: 53px;
+    padding: 0 30px;
+    background-color: #ff6b00;
+    /* 主题色 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    letter-spacing: 2px;
+}
+
+.searchBtn:hover {
+    background-color: #e55a00;
+    /* 深一点的橙色 */
+}
+
+
+@media (max-width: 768px) {
+
+    /* 响应式适配 */
+    .searchPanel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .searchPanel input[type="text"],
+    .date-input,
+    .date-input input[type="text"],
+    .date-input input[type="date"] {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .date-input {
+        flex-direction: column;
+    }
+
+    .searchBtn {
+        width: 100%;
+    }
+}
+
+>>>>>>> pr/6
 /* 搜索栏 */
 
 /* 精选目的地区 */
 
 .topContent {
     width: 100%;
-    height: 210px;
+    height: auto;
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -143,7 +296,8 @@
 .top h2 {
     font-size: 18px;
     color: #333;
-    margin-bottom: 15px;
+    max-width: 92%;
+    margin: 0 auto 15px;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
 }
@@ -175,6 +329,332 @@
 }
 
 /* 精选目的地区 */
+
+/* ===== 精选旅游路线 ===== */
+
+.route-list {
+    flex: 1;
+    max-width: 92%;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* ---------- 卡片主体 ---------- */
+
+.route-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 20px 16px;
+    background: linear-gradient(180deg, #fffdfb 0%, #ffffff 60%);
+    border: 1px solid #f0e6dc;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(122, 74, 40, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* 卡片左侧主题色装饰条 */
+.route-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #d94f3d, #b35927);
+}
+
+.route-item:hover {
+    transform: translateY(-4px);
+    border-color: #ecd9c8;
+    box-shadow: 0 12px 24px rgba(179, 89, 39, 0.15);
+}
+
+/* ---------- 卡片信息 ---------- */
+
+.route-badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 3px 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+    color: #fff;
+    background: linear-gradient(135deg, #d9542b, #a83424);
+    /* 小旗子造型 */
+    border-radius: 20px 20px 20px 4px;
+    box-shadow: 0 2px 5px rgba(168, 52, 36, 0.25);
+}
+
+.route-name {
+    margin: 10px 0 7px;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #3a2d25;
+    transition: color 0.3s ease;
+}
+
+.route-item:hover .route-name {
+    color: #b35927;
+}
+
+.route-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #8c8078;
+    /* 最多显示两行，保证卡片高度一致 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.route-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.route-tag {
+    padding: 2px 9px;
+    font-size: 12px;
+    color: #a8562a;
+    background: #fdf4ed;
+    border: 1px solid #f2dfcd;
+    border-radius: 4px;
+}
+
+/* ---------- 行程节点 ---------- */
+
+.route-path {
+    position: relative;
+    margin: 18px 0 14px;
+}
+
+/* 节点之间的连线由 .path-node::before 逐段绘制（能精确落在圆点中心），
+   .path-line 作为占位轨道不再显示 */
+.path-line {
+    display: none;
+}
+
+.path-nodes {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.path-node {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 每个节点自身宽度相同，从 -50% 画到 +50% 正好连到上一个圆点中心 */
+.path-node:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -50%;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: #e9cfb9;
+}
+
+.node-dot {
+    position: relative;
+    z-index: 1;
+    /* 盖住相邻节点画过来的连线 */
+    width: 12px;
+    height: 12px;
+    border: 2px solid #dcbfa6;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* 起点：实心红点 + 光晕 */
+.node-dot.start {
+    border-color: #c0392b;
+    background: #c0392b;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+}
+
+/* 终点：实心橙点 + 光晕 */
+.node-dot.end {
+    border-color: #d98e4a;
+    background: #d98e4a;
+    box-shadow: 0 0 0 3px rgba(217, 142, 74, 0.18);
+}
+
+.route-item:hover .node-dot {
+    transform: scale(1.15);
+}
+
+.route-item:hover .node-dot.start {
+    box-shadow: 0 0 0 4px rgba(192, 57, 43, 0.2);
+}
+
+.node-label {
+    max-width: 100%;
+    margin-top: 8px;
+    font-size: 11px;
+    line-height: 1.45;
+    text-align: center;
+    text-wrap: balance;
+    /* 折行时两行长度更接近 */
+    color: #7d7168;
+    transition: color 0.3s ease;
+}
+
+.route-item:hover .node-label {
+    color: #5d4a3c;
+}
+
+/* ---------- 底部信息与按钮 ---------- */
+
+.route-action {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px dashed #f0e4d8;
+}
+
+.route-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.route-days {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: #c0392b;
+}
+
+.route-days span {
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: #9a8f86;
+}
+
+.route-audience {
+    font-size: 12px;
+    color: #9a8f86;
+}
+
+.route-btn {
+    flex-shrink: 0;
+    padding: 9px 20px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #fff;
+    background: linear-gradient(135deg, #e8663d, #c0392b);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(192, 57, 43, 0.22);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.route-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #f0764a, #cf4331);
+    box-shadow: 0 8px 16px rgba(192, 57, 43, 0.3);
+}
+
+.route-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(192, 57, 43, 0.25);
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 1100px) {
+    .route-list {
+        grid-template-columns: 1fr;
+        /* 单列时铺满，避免卡片过窄导致节点文字折行 */
+        max-width: 100%;
+    }
+
+    .top h2 {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .top {
+        padding: 16px 14px 18px;
+    }
+
+    .route-item {
+        padding: 16px 14px 14px;
+    }
+
+    .route-name {
+        font-size: 17px;
+    }
+
+    .node-label {
+        max-width: 100%;
+        font-size: 10px;
+    }
+
+    .route-action {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .route-btn {
+        width: 100%;
+    }
+}
+
+/* 精选旅游路线 */
+
+/* ===== 轻提示 toast ===== */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 60px;
+    z-index: 9999;
+    padding: 12px 26px;
+    max-width: 80vw;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #fff;
+    text-align: center;
+    background: rgba(58, 45, 37, 0.9);
+    border-radius: 24px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translate(-50%, 16px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
 
 /* 天气预报 */
 
@@ -350,17 +830,31 @@
 /* 旅行攻略/故事区 */
 
 .rightBoxHeader {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f3e8dc;
+}
+
+/* 标题右侧一段红色渐变短线，替代生硬的整条分隔线 */
+.rightBoxHeader::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 130px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #c0392b, #e8a37a 65%, rgba(232, 163, 122, 0));
 }
 
 .rightBoxHeader h2 {
     font-size: 18px;
-    color: #333;
+    color: #3a2d25;
+    letter-spacing: 0.5px;
     margin: 0;
 }
 
@@ -490,39 +984,59 @@
 
 
 
-/* 容器样式 */
-.slider-box {
-    position: relative;
-    width: 100%;
-    margin: 0;
-    overflow: hidden;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-}
+/* ---------- 卡片网格 ---------- */
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
     max-width: 1200px;
-    margin: 50px auto;
-    padding: 0 20px;
+    /* 顶部间距交给标题栏，避免标题与图片区离得太远 */
+    margin: 4px auto 0;
+    padding: 0;
     align-items: stretch;
     /* 默认值，确保每项等高 */
 }
 
-/* 图片区 */
+/* ---------- 卡片主体 ---------- */
+
+.slider-box {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #f2e7dc;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(122, 74, 40, 0.07);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.slider-box:hover {
+    transform: translateY(-6px);
+    border-color: #e9d3bf;
+    box-shadow: 0 16px 30px rgba(179, 89, 39, 0.18);
+}
+
+/* 键盘聚焦到滑块时，整张卡片也给出反馈 */
+.slider-box:has(.slider-input:focus-visible) {
+    border-color: #e0b48f;
+    box-shadow: 0 10px 24px rgba(179, 89, 39, 0.16);
+}
+
+/* ---------- 图片区 ---------- */
+
 .img-wrap {
     position: relative;
     width: 100%;
     height: 220px;
     /* 固定高度，根据需要调整 */
     overflow: hidden;
-    background: #f0f0f0;
+    background: #f4eee9;
 }
 
-/* 图片的样式 */
 .slider-box img {
     width: 100%;
     height: 100%;
@@ -530,6 +1044,12 @@
     object-fit: cover;
     /* 关键：裁剪填充，保持比例不拉伸 */
     display: block;
+    transition: filter 0.35s ease;
+}
+
+/* 悬停只做轻微提亮，不做缩放，避免新旧两张图的分割线错位 */
+.slider-box:hover img {
+    filter: brightness(1.05) saturate(1.05);
 }
 
 /* 右边的图片（现在的实景图）绝对定位盖在上面 */
@@ -541,28 +1061,89 @@
     clip-path: polygon(var(--percent, 50%) 0, 100% 0, 100% 100%, var(--percent, 50%) 100%);
 }
 
-/* 拖动条样式 */
+/* 悬停时在图片底部浮出操作提示 */
+.img-wrap::after {
+    content: "拖动对比今昔";
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    z-index: 4;
+    padding: 3px 10px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    color: #fff;
+    background: rgba(58, 45, 37, 0.55);
+    border-radius: 20px;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, 6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.slider-box:hover .img-wrap::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* ---------- 拖动条 ---------- */
+
+/* 输入框铺满整块图片，命中区域更大，拖动更跟手 */
 .slider-input {
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 0;
     width: 100%;
-    transform: translateY(-50%);
+    height: 100%;
+    margin: 0;
+    padding: 0;
     -webkit-appearance: none;
+    appearance: none;
     background: transparent;
     cursor: ew-resize;
     z-index: 10;
 }
 
+.slider-input:focus {
+    outline: none;
+}
+
 /* 滑块中间的红色圆钮 */
 .slider-input::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     background-color: #c0392b;
     border: 3px solid #fff;
     border-radius: 50%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.slider-input:hover::-webkit-slider-thumb {
+    transform: scale(1.08);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.slider-input:active::-webkit-slider-thumb {
+    transform: scale(0.96);
+}
+
+/* Firefox 下的圆钮与轨道 */
+.slider-input::-moz-range-thumb {
+    width: 34px;
+    height: 34px;
+    background-color: #c0392b;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+    cursor: ew-resize;
+}
+
+.slider-input::-moz-range-track {
+    background: transparent;
 }
 
 /* 中间的分割线 */
@@ -571,49 +1152,103 @@
     top: 0;
     bottom: 0;
     left: var(--percent, 50%);
-    width: 2px;
-    background: #fff;
+    width: 3px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
     z-index: 5;
     transform: translateX(-50%);
     pointer-events: none;
 }
 
-/* 信息区 */
+/* ---------- 信息区 ---------- */
+
 .info-bar {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 12px 10px;
-    background: #fff;
-    border: 1px solid #e0e0e0;
-    border-top: none;
-    border-radius: 0 0 8px 8px;
+    justify-content: center;
+    gap: 5px;
+    padding: 13px 10px 15px;
+    min-height: 76px;
+    background: linear-gradient(180deg, #ffffff 0%, #fdf8f4 100%);
+    border-top: 1px solid #f6ece2;
     text-align: center;
-    gap: 6px;
     flex: 1;
-    min-height: 70px;
     box-sizing: border-box;
 }
 
+/* 信息区顶部居中的一小段红色渐变短线 */
+.info-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 34px;
+    height: 2px;
+    border-radius: 0 0 2px 2px;
+    background: linear-gradient(90deg, rgba(192, 57, 43, 0), #c0392b 35%, #c0392b 65%, rgba(192, 57, 43, 0));
+    transform: translateX(-50%);
+}
 
+/* 时间做成小胶囊，与标题区分层级 */
 .info-bar .time {
-    font-size: 14px;
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     color: #c0392b;
-    font-weight: bold;
+    background: rgba(192, 57, 43, 0.07);
+    border-radius: 20px;
     text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.info-bar .time:hover {
+    color: #fff;
+    background: #c0392b;
 }
 
 .info-bar .event {
-    font-size: 16px;
-    color: #333;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #3a2d25;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.info-bar .time:hover,
 .info-bar .event:hover {
-    color: #e74c3c;
-    text-decoration: underline;
+    color: #c0392b;
+}
+
+/* ---------- 响应式 ---------- */
+
+@media (max-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+
+    /* 窄屏下左右两栏改为上下排列，红色故事卡片能占满整行 */
+    .bottomBox {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 700px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .img-wrap {
+        height: 200px;
+    }
 }
 
 /* 图文 */
