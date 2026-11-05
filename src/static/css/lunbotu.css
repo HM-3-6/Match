@@ -44,6 +44,20 @@
     transform: translateX(-200%);
 }
 
+/* 顶部云打卡轮播使用独立的单选框（cloudSlide1~3），
+   与下方原有轮播的 slide1~3 互不影响 */
+#cloudSlide1:checked~.radio-slides {
+    transform: translateX(0%);
+}
+
+#cloudSlide2:checked~.radio-slides {
+    transform: translateX(-100%);
+}
+
+#cloudSlide3:checked~.radio-slides {
+    transform: translateX(-200%);
+}
+
 /* 底部导航点样式 */
 .radio-nav {
     position: absolute;
@@ -68,6 +82,15 @@
 #slide1:checked~.radio-nav label:nth-child(1),
 #slide2:checked~.radio-nav label:nth-child(2),
 #slide3:checked~.radio-nav label:nth-child(3) {
+    background-color: #d32f2f;
+    width: 20px;
+    border-radius: 4px;
+}
+
+/* 顶部云打卡轮播的选中导航点 */
+#cloudSlide1:checked~.radio-nav label:nth-child(1),
+#cloudSlide2:checked~.radio-nav label:nth-child(2),
+#cloudSlide3:checked~.radio-nav label:nth-child(3) {
     background-color: #d32f2f;
     width: 20px;
     border-radius: 4px;
