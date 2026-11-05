@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>地图演示 · 样式 / 中心点 / 拖拽 / 显示范围 / 控件 / 井冈山路线</title>
+    <link rel="stylesheet" href="./static/css/mapDemo.css">
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <div id="cursorPanel" class="panel">
+      <h3>鼠标样式</h3>
+      <label><input type="radio" name="cursor" value="default"><span class="ico">&#8598;</span><span>默认</span></label>
+      <label><input type="radio" name="cursor" value="pointer" checked><span
+          class="ico">&#9757;</span><span>手型</span></label>
+      <label><input type="radio" name="cursor" value="move"><span class="ico">&#10021;</span><span>移动</span></label>
+      <label><input type="radio" name="cursor" value="crosshair"><span
+          class="ico">&#10043;</span><span>十字</span></label>
+    </div>
+
+    <div id="infoPanel" class="panel">
+      <h4>地图级别与中心点</h4>
+      <p>当前级别：<span id="map-zoom">17</span></p>
+      <p>当前中心点：<span id="map-center">—</span></p>
+    </div>
+
+    <div id="boundsPanel" class="panel">
+      <h4>地图显示范围</h4>
+      <p>NorthEast：<span id="bounds-ne">—</span></p>
+      <p>SouthWest：<span id="bounds-sw">—</span></p>
+      <div class="btn-row">
+        <button type="button" id="lockBoundsBtn" class="btn">限定显示范围</button>
+        <button type="button" id="unlockBoundsBtn" class="btn btn-ghost">取消限制</button>
+      </div>
+    </div>
+
+    <div id="dragPanel" class="panel">
+      <h4>标记点拖拽</h4>
+      <p id="dragStatus">请拖拽标记点试试</p>
+      <div class="btn-row">
+        <button type="button" id="bindBtn" class="btn">绑定事件</button>
+        <button type="button" id="unbindBtn" class="btn btn-ghost">解绑事件</button>
+      </div>
+    </div>
+
+    <div id="routePanel" class="panel">
+      <h4>井冈山路线</h4>
+      <p id="routeStatus">按地点坐标依次连线</p>
+      <div class="btn-row">
+        <button type="button" id="showRouteBtn" class="btn">显示路线</button>
+        <button type="button" id="hideRouteBtn" class="btn btn-ghost">隐藏路线</button>
+      </div>
+    </div>
+
+    <div id="controlPanel" class="panel">
+      <h4>地图控件</h4>
+      <div class="ctrl-grid">
+        <label><input type="checkbox" checked data-control="scale"><span>比例尺</span></label>
+        <label><input type="checkbox" checked data-control="toolbar"><span>工具条</span></label>
+        <label><input type="checkbox" checked data-control="controlbar"><span>方向盘</span></label>
+        <label><input type="checkbox" checked data-control="hawkeye"><span>显示鹰眼</span></label>
+      </div>
+    </div>
+
+    <script src="./components/Javascript/maps.js"></script>
+    <script src="./components/Javascript/mapReuse.js"></script>
+    <script>
+      initMapDemo({
+        name: '井冈山',
+        center: [114.118145, 26.510976],
+        zoom: 10,
+        limitSW: [113.85, 26.2],
+        limitNE: [114.39, 26.82],
+        route: [
+          { lnglat: [114.165584, 26.56768], name: '井冈山革命博物馆', flagOffset: [-26, -28] },
+          { lnglat: [114.168853, 26.569096], name: '茨坪毛泽东旧居', offset: [6, 30] },
+          { lnglat: [114.122578, 26.619808], name: '黄洋界哨口', offset: [-72, -4] },
+          { lnglat: [113.951786, 26.70645], name: '龙江书院', offset: [-6, 32] },
+          { lnglat: [114.284504, 26.315502], name: '五指峰', offset: [52, -2] }
+        ]
+      });
+    </script>
+  </body>
+
+</html>

@@ -7,10 +7,10 @@
 
 **组件化前端工程 · 文档先行 · 资源归一**
 
-![status](https://img.shields.io/badge/status-early-22c55e?style=flat-square)
-![PRs welcome](https://img.shields.io/badge/PRs-welcome-3b82f6?style=flat-square)
-![conventional commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-f472b6?style=flat-square)
-![license](https://img.shields.io/badge/license-TBD-94a3b8?style=flat-square)
+![status](./src/static/image/README/status-early-22c55e.svg)
+![PRs welcome](./src/static/image/README/PRs-welcome-3b82f6.svg)
+![conventional commits](./src/static/image/README/Conventional%20Commits-1.0.svg)
+![license](./src/static/image/README/license-TBD-94a3b8.svg)
 
 <a href="#-项目结构">项目结构</a> ·
 <a href="#-快速开始">快速开始</a> ·

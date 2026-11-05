@@ -1,0 +1,278 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+}
+
+.panel {
+    position: fixed;
+    z-index: 200;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .25);
+    font: 14px/1.5 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+    color: #333;
+}
+
+/* 鼠标样式选择面板 */
+#cursorPanel {
+    top: 12px;
+    left: 12px;
+    width: 118px;
+    padding: 10px 12px 8px;
+    user-select: none;
+}
+
+#cursorPanel h3 {
+    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+}
+
+#cursorPanel label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#cursorPanel label:hover {
+    background: #f0f6ff;
+}
+
+#cursorPanel input {
+    margin: 0;
+    cursor: pointer;
+}
+
+#cursorPanel .ico {
+    width: 16px;
+    text-align: center;
+    font-size: 14px;
+    color: #0288d1;
+}
+
+/* 地图信息面板 */
+#infoPanel {
+    top: 12px;
+    right: 12px;
+    min-width: 220px;
+    padding: 10px 14px;
+}
+
+#infoPanel h4,
+#boundsPanel h4,
+#dragPanel h4 {
+    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#infoPanel p {
+    margin: 2px 0;
+    color: #555;
+}
+
+#infoPanel span {
+    color: #0288d1;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 显示范围限制面板 */
+#boundsPanel {
+    left: 12px;
+    top: 196px;
+    width: 236px;
+    padding: 10px 14px 12px;
+}
+
+#boundsPanel p {
+    margin: 0 0 4px;
+    font-size: 13px;
+    color: #555;
+}
+
+#boundsPanel span {
+    color: #0288d1;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 标记点拖拽面板 */
+#dragPanel {
+    right: 12px;
+    bottom: 44px;
+    width: 236px;
+    padding: 10px 14px 12px;
+}
+
+#dragPanel p {
+    margin: 0 0 10px;
+    color: #555;
+    min-height: 21px;
+}
+
+/* 地图控件面板 */
+#controlPanel {
+    left: 12px;
+    top: 332px;
+    width: 236px;
+    padding: 10px 14px 8px;
+}
+
+#controlPanel .ctrl-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#controlPanel label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 50%;
+    padding: 4px 0;
+    cursor: pointer;
+    font-size: 13px;
+    color: #555;
+    box-sizing: border-box;
+}
+
+#controlPanel input {
+    margin: 0;
+    cursor: pointer;
+}
+
+/* 长征路线面板 */
+#routePanel {
+    left: 12px;
+    bottom: 44px;
+    width: 236px;
+    padding: 10px 14px 12px;
+}
+
+#routePanel p {
+    margin: 0 0 10px;
+    font-size: 12px;
+    color: #888;
+}
+
+/* 节点红旗 */
+.lm-flag {
+    position: relative;
+    width: 16px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.lm-flag .lm-pole {
+    position: absolute;
+    left: 3px;
+    bottom: 0;
+    width: 2px;
+    height: 26px;
+    background: #c62828;
+    border-radius: 1px;
+}
+
+.lm-flag .lm-cloth {
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 12px;
+    height: 10px;
+    background: #e53935;
+    clip-path: polygon(0 0, 100% 0, 80% 50%, 100% 100%, 0 100%);
+}
+
+.lm-flag.checked .lm-pole {
+    background: #9e9e9e;
+}
+
+.lm-flag.checked .lm-cloth {
+    background: #bdbdbd;
+}
+
+/* 标签不拦截点击，保证红旗可点 */
+.amap-overlay-text-container {
+    pointer-events: none;
+}
+
+/* 打卡弹窗 */
+.route-popup {
+    min-width: 118px;
+    padding: 2px 2px 0;
+}
+
+.route-popup .rp-date {
+    color: #b71c1c;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.route-popup .rp-name {
+    color: #333;
+    font-size: 14px;
+    margin: 2px 0 8px;
+}
+
+.route-popup .rp-btn {
+    padding: 4px 14px;
+    border: none;
+    border-radius: 3px;
+    background: #d32f2f;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.route-popup .rp-btn:hover {
+    background: #b71c1c;
+}
+
+.route-popup .rp-done {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 3px;
+    background: #e0e0e0;
+    color: #757575;
+    font-size: 12px;
+}
+
+.btn-row {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    flex: 1;
+    padding: 6px 0;
+    border: 1px solid #0288d1;
+    border-radius: 3px;
+    background: #0288d1;
+    color: #fff;
+    font: 13px/1.4 inherit;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #039be5;
+}
+
+.btn-ghost {
+    background: #fff;
+    color: #0288d1;
+}
+
+.btn-ghost:hover {
+    background: #e8f4fd;
+}

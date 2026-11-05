@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+ <html lang="zh-CN">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>红色景点预约购票</title>
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+             font-family: "Microsoft YaHei", SimSun, sans-serif;
+         }
+         body {
+             background-color: #fef5f5;
+         }
+         /* 顶部导航 */
+         header {
+             background-color: #b71c1c;
+             color: #fff;
+             padding: 20px 0;
+             text-align: center;
+         }
+         header h1 {
+             font-size: 28px;
+             letter-spacing: 3px;
+         }
+         header p {
+             margin-top: 6px;
+             opacity: 0.9;
+             font-size: 15px;
+         }
+         .wrap {
+             max-width: 1000px;
+             margin: 40px auto;
+             padding: 0 20px;
+         }
+         .spot-select {
+             background: #fff;
+             border-radius: 12px;
+             padding: 22px;
+             box-shadow: 0 4px 14px rgba(183, 28, 28, 0.1);
+             margin-bottom: 30px;
+         }
+         .spot-select h3 {
+             color:#b71c1c;
+             margin-bottom:16px;
+         }
+         .spot-list {
+             display: grid;
+             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+             gap:14px;
+         }
+         .spot-item {
+             border:1px solid #eee;
+             border-radius:8px;
+             padding:12px;
+             cursor:pointer;
+             transition:0.2s;
+             text-align:center;
+         }
+         .spot-item:hover{
+             border-color:#b71c1c;
+             background:#fff0f0;
+         }
+         .spot-item.active{
+             background:#b71c1c;
+             color:white;
+             border-color:#b71c1c;
+         }
+         .content-row {
+             display: grid;
+             grid-template-columns: 1fr 1fr;
+             gap: 30px;
+         }
+         /* 景点信息 */
+         .info-card {
+             background: #fff;
+             border-radius: 12px;
+             overflow: hidden;
+             box-shadow: 0 4px 14px rgba(183, 28, 28, 0.1);
+         }
+         .info-top {
+             height: 180px;
+             background-color: #b71c1c;
+             color: white;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 26px;
+             font-weight: bold;
+         }
+         .info-content {
+             padding: 22px;
+         }
+         .info-content h2 {
+             color: #911414;
+             margin-bottom: 12px;
+             font-size: 22px;
+         }
+         .info-content p {
+             color: #555;
+             line-height: 1.7;
+             font-size: 15px;
+             margin-bottom:10px;
+         }
+         .tip {
+             margin-top:15px;
+             padding:10px;
+             background:#fff0f0;
+             border-left:4px solid #b71c1c;
+             font-size:14px;
+             color:#772222;
+         }
+         /* 预约表单 */
+         .form-card {
+             background: #fff;
+             border-radius: 12px;
+             padding: 26px;
+             box-shadow: 0 4px 14px rgba(183, 28, 28, 0.1);
+         }
+         .form-card h3 {
+             color:#b71c1c;
+             font-size:20px;
+             margin-bottom:20px;
+             text-align:center;
+         }
+         .item {
+             margin-bottom:18px;
+         }
+         .item label {
+             display:block;
+             color:#444;
+             margin-bottom:7px;
+             font-size:15px;
+         }
+         .item input,
+         .item select {
+             width:100%;
+             padding:11px 12px;
+             border:1px solid #ddd;
+             border-radius:8px;
+             font-size:15px;
+         }
+         .submit-btn {
+             width:100%;
+             padding:13px;
+             background-color:#b71c1c;
+             color:#fff;
+             border:none;
+             border-radius:8px;
+             font-size:17px;
+             cursor:pointer;
+             transition: 0.2s;
+         }
+         .submit-btn:hover {
+             background-color:#911414;
+         }
+         footer {
+             text-align:center;
+             margin-top:50px;
+             padding:20px;
+             color:#911414;
+             font-size:14px;
+         }
+         /* 弹窗样式 */
+         .modal {
+             display: none;
+             position: fixed;
+             top:0;
+             left:0;
+             width:100%;
+             height:100%;
+             background-color: rgba(0,0,0,0.5);
+             align-items:center;
+             justify-content:center;
+             z-index:999;
+         }
+         .modal-box {
+             background:#fff;
+             width:360px;
+             padding:30px;
+             border-radius:12px;
+             text-align:center;
+         }
+         .modal-box h4{
+             color:#b71c1c;
+             font-size:22px;
+             margin-bottom:15px;
+         }
+         .modal-box p{
+             color:#555;
+             margin-bottom:22px;
+         }
+         .close-btn{
+             padding:10px 26px;
+             background:#b71c1c;
+             color:white;
+             border:none;
+             border-radius:6px;
+             cursor:pointer;
+         }
+         /* 适配手机 */
+         @media (max-width:700px) {
+             .content-row {
+                 grid-template-columns: 1fr;
+             }
+         }
+     </style>
+ </head>
+ <body>
+     <header>
+         <h1>红色景点预约购票系统</h1>
+         <p>铭记历史 · 线上预约 · 文明参观</p >
+     </header>
+     <div class="wrap">
+         <!-- 景点选择区域：多个红色景点 -->
+         <div class="spot-select">
+             <h3>选择参观景点</h3>
+             <div class="spot-list">
+                 <div class="spot-item active" data-name="遵义会议会址" data-address="贵州省遵义市红花岗区" data-time="08:30 - 17:00（周一闭馆）">遵义会议会址</div>
+                 <div class="spot-item" data-name="井冈山革命根据地" data-address="江西省吉安市井冈山市" data-time="08:00 - 17:30">井冈山</div>
+                 <div class="spot-item" data-name="延安革命纪念馆" data-address="陕西省延安市宝塔区" data-time="08:00 - 17:00">延安</div>
+                 <div class="spot-item" data-name="西柏坡纪念馆" data-address="河北省石家庄市平山县" data-time="09:00 - 17:00">西柏坡</div>
+                 <div class="spot-item" data-name="中共一大会址" data-address="上海市兴业路76号" data-time="09:00 - 17:00（周一闭馆）">中共一大会址</div>
+             </div>
+         </div>
+         <div class="content-row">
+             <!-- 左侧景点介绍 -->
+             <div class="info-card">
+                 <div class="info-top" id="info-title">遵义会议会址</div>
+                 <div class="info-content">
+                     <h2 id="spot-name">遵义会议会址</h2>
+                     <p id="spot-desc">遵义会议是中国革命史上生死攸关的转折点，在这里确立了正确的领导路线，挽救了党、挽救了红军、挽救了中国革命。</p >
+                     <p>📍地址：<span id="spot-address">贵州省遵义市红花岗区</span></p >
+                     <p>⏰开放时间：<span id="spot-time">08:30 - 17:00（周一闭馆）</span></p >
+                     <p>🎫门票：免费参观，需提前实名预约</p >
+                     <div class="tip">
+                         温馨提示：请携带身份证，按时入园，自觉遵守场馆规定。
+                     </div>
+                 </div>
+             </div>
+             <!-- 右侧预约表单 -->
+             <div class="form-card">
+                 <h3>参观预约</h3>
+                 <div class="item">
+                     <label>预约人姓名</label>
+                     <input type="text" id="username" placeholder="请输入真实姓名">
+                 </div>
+                 <div class="item">
+                     <label>身份证号</label>
+                     <input type="text" id="idcard" placeholder="请输入身份证号码">
+                 </div>
+                 <div class="item">
+                     <label>联系电话</label>
+                     <input type="tel" id="phone" placeholder="请输入手机号">
+                 </div>
+                 <div class="item">
+                     <label>参观日期</label>
+                     <input type="date" id="visitDate">
+                 </div>
+                 <div class="item">
+                     <label>预约人数</label>
+                     <select id="count">
+                         <option>1人</option>
+                         <option>2人</option>
+                         <option>3人</option>
+                         <option>4人</option>
+                         <option>5人</option>
+                     </select>
+                 </div>
+                 <div class="item">
+                     <label>参观时段</label>
+                     <select id="timeSlot">
+                         <option>上午场 08:30-12:00</option>
+                         <option>下午场 13:00-17:00</option>
+                     </select>
+                 </div>
+                 <button class="submit-btn" id="submitBtn">提交预约</button>
+             </div>
+         </div>
+     </div>
+     <footer>
+         红色文化预约平台 | 传承红色基因
+     </footer>
+     <!-- 弹窗：预约成功 -->
+     <div class="modal" id="successModal">
+         <div class="modal-box">
+             <h4>✅预约提交成功</h4>
+             <p>您已成功预约【<span id="modal-spot"></span>】<br>请携带身份证按时前往参观！</p >
+             <button class="close-btn" id="closeModal">确定</button>
+         </div>
+     </div>
+     <script>
+         //景点描述数据
+         const descData = {
+             "遵义会议会址": "遵义会议是中国革命史上生死攸关的转折点，在这里确立了正确的领导路线，挽救了党、挽救了红军、挽救了中国革命。",
+             "井冈山革命根据地": "中国第一个农村革命根据地，点燃了工农武装割据的星星之火，开辟了农村包围城市的革命道路。",
+             "延安革命纪念馆": "革命圣地延安，是抗日战争和解放战争的指挥中心，孕育了自力更生、艰苦奋斗的延安精神。",
+             "西柏坡纪念馆": "新中国从这里走来，是党中央进驻北平解放全中国前的最后一个农村指挥所。",
+             "中共一大会址": "中国共产党的诞生地，见证开天辟地的大事变，红色梦想从这里启航。"
+         }
+         //切换景点
+         const spotItems = document.querySelectorAll('.spot-item');
+         spotItems.forEach(item=>{
+             item.onclick = function(){
+                 spotItems.forEach(i=>i.classList.remove('active'));
+                 this.classList.add('active');
+                 const name = this.dataset.name;
+                 document.getElementById('info-title').innerText = name;
+                 document.getElementById('spot-name').innerText = name;
+                 document.getElementById('spot-desc').innerText = descData[name];
+                 document.getElementById('spot-address').innerText = this.dataset.address;
+                 document.getElementById('spot-time').innerText = this.dataset.time;
+             }
+         })
+         //弹窗
+         const modal = document.getElementById('successModal');
+         const submitBtn = document.getElementById('submitBtn');
+         const closeModal = document.getElementById('closeModal');
+         submitBtn.onclick = function(){
+             //获取选中景点
+             const activeSpot = document.querySelector('.spot-item.active').dataset.name;
+             document.getElementById('modal-spot').innerText = activeSpot;
+             modal.style.display = "flex";
+         }
+         closeModal.onclick = function(){
+             modal.style.display = "none";
+         }
+     </script>
+ </body>
+ </html>
