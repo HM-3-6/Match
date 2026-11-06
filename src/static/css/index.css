@@ -539,6 +539,8 @@
     color: #3a2d25;
     letter-spacing: 0.5px;
     margin: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 

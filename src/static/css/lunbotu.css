@@ -44,6 +44,19 @@
     transform: translateX(-200%);
 }
 
+/* 底部渐暗，保证导航点在任何图片上都看得清 */
+.radio-carousel::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 56px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
+    pointer-events: none;
+    z-index: 9;
+}
+
 /* 底部导航点样式 */
 .radio-nav {
     position: absolute;
@@ -55,11 +68,48 @@
     z-index: 10;
 }
 
+/* 左右切换按钮 */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 11;
+    opacity: 0.85;
+    transition: background 0.3s ease, opacity 0.3s ease;
+}
+
+.carousel-arrow:hover {
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 1;
+}
+
+.carousel-arrow.prev {
+    left: 10px;
+}
+
+.carousel-arrow.next {
+    right: 10px;
+}
+
 .radio-nav label {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
     cursor: pointer;
     transition: all 0.3s;
 }
