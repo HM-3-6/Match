@@ -4,42 +4,42 @@ const redStories = [
         oldImg: '南昌起义旧.jpg',
         newImg: '南昌起义新.jpg',
         date: '1927年8月1日',
-        title: '南昌起义',
+        title: '石破天惊第一枪',
         link: 'nanchangUprising.html'
     },
     {
         oldImg: '井冈山茨坪旧.jpg',
         newImg: '井冈山茨坪新.jpg',
         date: '1927年10月—1929年',
-        title: '井冈山革命根据地',
+        title: '工农武装割据起',
         link: 'jingGangShan.html'
     },
     {
         oldImg: '于都浮桥旧.jpeg',
         newImg: '于都新.jpg',
         date: '1934年10月',
-        title: '红军长征出发地',
+        title: '夜渡于都踏征程',
         link: 'Yudu.html'
     },
     {
         oldImg: '泸定桥旧.jpg',
         newImg: '泸定桥新.jpg',
         date: '1935年5月29日',
-        title: '飞夺泸定桥',
+        title: '二十二勇士破铁索',
         link: 'ludingBridge.html'
     },
     {
         oldImg: '遵义会议旧.jpg',
         newImg: '遵义会议新.jpg',
         date: '1935年1月',
-        title: '遵义会议',
+        title: '寻路遵义定乾坤',
         link: 'zunyiConference.html'
     },
     {
         oldImg: '延安旧.webp',
         newImg: '延安新.png',
         date: '1935年10月—1948年3月',
-        title: '延安',
+        title: '陕北窑洞定江山',
         link: 'yanAn.html'
     }
 ];
